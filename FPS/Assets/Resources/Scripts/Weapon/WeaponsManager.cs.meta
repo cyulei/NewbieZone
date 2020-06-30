@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6227c041ee8148c41803ae9024e34fca
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - NormalBulletSprite: {fileID: 21300000, guid: 925fdfdb73000e94b8d6e4d0fc40e207,
+      type: 3}
+  - FrozenBulletSprite: {fileID: 21300000, guid: 5bcc35be087baff48b7ae6bf53f7dee0,
+      type: 3}
+  - FireBulletSprite: {fileID: 21300000, guid: 97281702f2114834095ec17f1f5e0707, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
