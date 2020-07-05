@@ -14,22 +14,12 @@ public class CurrentWeaponUI : MonoBehaviour
         // 监听武器改变事件
         weaponsManager = Director.GetInstance().CurrentWeaponsManager;
         weaponsManager.WeaponTypeChange += WeaponChange;
+        weaponImage.sprite = weaponsManager.bulletSprites[0];
     }
 
     // 改变当前武器UI图片
-    void WeaponChange(WeaponType weaponType)
+    void WeaponChange(int typeIndex)
     {
-        switch(weaponType)
-        {
-            case WeaponType.Fire:
-                weaponImage.sprite = weaponsManager.FireBulletSprite;
-                break;
-            case WeaponType.Frozen:
-                weaponImage.sprite = weaponsManager.FrozenBulletSprite;
-                break;
-            default:
-                weaponImage.sprite = weaponsManager.NormalBulletSprite;
-                break;
-        }
+        weaponImage.sprite = weaponsManager.bulletSprites[typeIndex];
     }
 }

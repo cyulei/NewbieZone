@@ -13,35 +13,33 @@ public class BulletFactory : MonoBehaviour
         Director.GetInstance().CurrentBulletFactory = this;
     }
 
-    public GameObject GetBullet(Transform shootingTransform)
+    public GameObject GetBullet(Transform shootingTransform, BulletOwner bulletOwner, WeaponType weaponType = WeaponType.Normal)
     {
         bullet = null;
 
      //   Debug.Log("free的数量" + free.Count);
         for (int i = 0; i < free.Count; i++)
         {
-            if (Director.GetInstance().CurrentWeaponsManager.CurrentWeaponType == WeaponType.Normal && WeaponType.Normal == free[i].bulletType)
+            if (weaponType == free[i].bulletType)
+            {
                 bullet = free[i];
-            else if (Director.GetInstance().CurrentWeaponsManager.CurrentWeaponType == WeaponType.Fire && WeaponType.Fire == free[i].bulletType)
-                bullet = free[i];
-            else if (Director.GetInstance().CurrentWeaponsManager.CurrentWeaponType == WeaponType.Frozen && WeaponType.Frozen == free[i].bulletType)
-                bullet = free[i];
-
-            free.Remove(free[i]);
-            break;
+                free.Remove(free[i]);
+                break;
+            }
         }
 
         if (bullet == null)
         {
-            if (Director.GetInstance().CurrentWeaponsManager.CurrentWeaponType == WeaponType.Normal)
+            if (weaponType == WeaponType.Normal)
                 bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet/NomalBullet"), shootingTransform.position, Quaternion.identity).GetComponent<Bullet>();
-            else if(Director.GetInstance().CurrentWeaponsManager.CurrentWeaponType == WeaponType.Fire)
+            else if(weaponType == WeaponType.Fire)
                 bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet/FireBullet"), shootingTransform.position, Quaternion.identity).GetComponent<FireBullet>() as Bullet;
-            else if(Director.GetInstance().CurrentWeaponsManager.CurrentWeaponType == WeaponType.Frozen)
+            else if(weaponType == WeaponType.Frozen)
                 bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet/FrozenBullet"), shootingTransform.position, Quaternion.identity).GetComponent<FrozenBullet>() as Bullet;
         }
 
         bullet.transform.position = shootingTransform.position;
+        bullet.bulletOwner = bulletOwner;
         bullet.GetComponent<Bullet>().DirectionTowards = shootingTransform.forward * 1000 - shootingTransform.position;
         //添加到使用列表中
         used.Add(bullet.GetComponent<Bullet>());

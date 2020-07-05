@@ -52,23 +52,21 @@ public class UserInput : MonoBehaviour
             player.PlayerJump();
         }
 
-        if(Input.GetKeyDown(KeyCode.Q) && QButtonDown != null)
-        {
-            QButtonDown();
-        }
-
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Director.GetInstance().CurrentWeaponsManager.ChangeWeaponType(WeaponType.Normal);
+            Director.GetInstance().CurrentWeaponsManager.ChangeWeaponTypeByKeyborad(1);
         }
         else if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            Director.GetInstance().CurrentWeaponsManager.ChangeWeaponType(WeaponType.Fire);
+            Director.GetInstance().CurrentWeaponsManager.ChangeWeaponTypeByKeyborad(2);
         }
         else if(Input.GetKeyDown(KeyCode.Alpha3))
         {
-            Director.GetInstance().CurrentWeaponsManager.ChangeWeaponType(WeaponType.Frozen);
+            Director.GetInstance().CurrentWeaponsManager.ChangeWeaponTypeByKeyborad(3);
         }
+
+        Director.GetInstance().CurrentWeaponsManager.ChangeWeaponTypeByMouse(Input.GetAxis("Mouse ScrollWheel"));
+
     }
 
     public float Clamp(float value, float max, float min)
@@ -107,7 +105,4 @@ public class UserInput : MonoBehaviour
             Cursor.visible = true;
         }
     }
-
-    public delegate void QButtonDownEvent();
-    public event QButtonDownEvent QButtonDown;
 }

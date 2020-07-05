@@ -2,8 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BulletOwner
+{
+    Monster,
+    Player
+}
+
 public class Bullet : MonoBehaviour
 {
+    [HideInInspector]
+    public BulletOwner bulletOwner;
+
     [Tooltip("子弹击中物体的特效")]
     public Transform Effect;
     [Tooltip("子弹移动的速度")]
@@ -44,10 +53,15 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Monster")
+        if (bulletOwner == BulletOwner.Player && other.gameObject.tag == "Monster")
         {
          //   Debug.Log("打中怪兽了");
             HurtMonster(other.gameObject);
+            isHitGameobject = true;
+        }
+        else if(bulletOwner == BulletOwner.Monster && other.gameObject.tag == "Player")
+        {
+            Debug.Log("打中玩家啦");
             isHitGameobject = true;
         }
     }

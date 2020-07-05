@@ -2,11 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChooseWeapons : MonoBehaviour
 {
     [Tooltip("选择武器面板可容纳的武器容器")]
-    public List<GameObject> WeaponToggle;
+    public List<GameObject> WeaponToggle = new List<GameObject>();
+
+    public List<Image> toggleImage = new List<Image>();
 
     [Tooltip("武器显示第一个位置")]
     public Transform endPos;     
@@ -15,13 +18,46 @@ public class ChooseWeapons : MonoBehaviour
 
     bool isShowWeaponToggle = false;       // 是否展示武器选择界面
 
+    [Header("选择武器面板动画速度")]
+    public float toggleScaleSpeed = 0.5f;
+    public float toggleScaleSize = 1.5f;
+
     void Start()
     {
-        // 监听Q键按下事件
-        UserInput userInput =  Director.GetInstance().CurrentUserInput;
-       // Debug.Log("ChooseWeapons初始化");
-        if (!userInput) Debug.LogError("UserInput还没有初始化");
-        userInput.QButtonDown += ChangeWeaponToggleShow;
+        WeaponsManager weaponsManager = Director.GetInstance().CurrentWeaponsManager;
+        weaponsManager.WeaponTypeChange += WeaponChange;
+
+        if (toggleImage.Count != Director.GetInstance().CurrentWeaponsManager.bulletSprites.Count)
+        {
+            Debug.LogError("可选的武器UI列表与提供的UI数量不同");
+        }
+        for(int i = 0; i < toggleImage.Count; i++)
+        {
+            toggleImage[i].sprite = Director.GetInstance().CurrentWeaponsManager.bulletSprites[i];
+        }
+    }
+
+    /// <summary>
+    /// 改变武器
+    /// </summary>
+    /// <param name="typeIndex">武器序号</param>
+    private void WeaponChange(int typeIndex)
+    {
+        StopCoroutine("HideToggle");
+        ShowToggle();
+        for (int i = 0; i < WeaponToggle.Count; i++)
+        {
+            if(i == typeIndex)
+            {
+                WeaponToggle[typeIndex].transform.DOScale(new Vector3(toggleScaleSize, toggleScaleSize, toggleScaleSize), toggleScaleSpeed);
+            }
+            else
+            {
+                WeaponToggle[i].transform.DOScale(new Vector3(1, 1, 1), toggleScaleSpeed);
+            }
+        }
+        
+        StartCoroutine("HideToggle");
     }
 
     public void ChangeWeaponToggleShow()
@@ -29,21 +65,39 @@ public class ChooseWeapons : MonoBehaviour
       //  Debug.Log("移动");
         if (!isShowWeaponToggle)
         {
-
-            for(int i = 0;i < WeaponToggle.Count; i++)
-            {
-                Vector3 pos = new Vector3(endPos.position.x, endPos.position.y - i * 90, endPos.position.z);
-                WeaponToggle[i].transform.DOMove(pos, 0.5f);
-            }
-            isShowWeaponToggle = true;
+            ShowToggle();
         }
         else
         {
-            for (int i = 0; i < WeaponToggle.Count; i++)
-            {
-                WeaponToggle[i].transform.DOMove(startPos.position, 0.5f);
-            }
-            isShowWeaponToggle = false;
+            HideToggle();
         }
+    }
+
+    /// <summary>
+    /// 展示UI
+    /// </summary>
+    private void ShowToggle()
+    {
+        for (int i = 0; i < WeaponToggle.Count; i++)
+        {
+            Vector3 pos = new Vector3(endPos.position.x, endPos.position.y - i * 90, endPos.position.z);
+            WeaponToggle[i].transform.DOMove(pos, 0.5f);
+        }
+        isShowWeaponToggle = true;
+    }
+
+    /// <summary>
+    /// 隐藏UI
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator HideToggle()
+    {
+        yield return new WaitForSeconds(3f);
+        for (int i = 0; i < WeaponToggle.Count; i++)
+        {
+            WeaponToggle[i].transform.DOMove(startPos.position, 0.5f);
+            WeaponToggle[i].transform.DOScale(new Vector3(1, 1, 1), toggleScaleSpeed);
+        }
+        isShowWeaponToggle = false;
     }
 }

@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("shootingPosition未设置射击点");
         }
-        GameObject bullet = director.CurrentBulletFactory.GetBullet(shootingPosition.transform);
+        GameObject bullet = director.CurrentBulletFactory.GetBullet(shootingPosition.transform,BulletOwner.Player, director.CurrentWeaponsManager.CurrentWeaponType);
     }
 
     public void PlayerJump()
