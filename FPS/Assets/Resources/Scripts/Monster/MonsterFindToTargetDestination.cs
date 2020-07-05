@@ -43,7 +43,7 @@ public class MonsterFindToTargetDestination : BTAction
         }
 
         database.SetData<Vector3>(playerLocationName, target.transform.position);
-        Debug.Log("玩家位置:" + target.transform.position);
+        //Debug.Log("玩家位置:" + target.transform.position);
         return target.transform.position - trans.position;
     }
 

@@ -61,7 +61,7 @@ public class Bullet : MonoBehaviour
         }
         else if(bulletOwner == BulletOwner.Monster && other.gameObject.tag == "Player")
         {
-            Debug.Log("打中玩家啦");
+            //Debug.Log("打中玩家啦");
             isHitGameobject = true;
         }
     }

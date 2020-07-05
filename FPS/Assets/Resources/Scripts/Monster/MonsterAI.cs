@@ -35,8 +35,12 @@ public class MonsterAI : BTTree
             BTParallel parallel = new BTParallel(BTParallel.ParallelFunction.Or);
             {
                 parallel.AddChild(findToTargetDestination);    // 先找到走到攻击目标的目的地
-                parallel.AddChild(monsterMoveRotate);          // 怪物转向目的地
-                parallel.AddChild(move);                       // 进行移动
+                BTSequence rotateAndMove = new BTSequence();
+                {
+                    rotateAndMove.AddChild(monsterMoveRotate);
+                    rotateAndMove.AddChild(move);
+                }
+                parallel.AddChild(rotateAndMove);             // 怪物朝着目的地移动
             }
             attack.AddChild(parallel);
             attack.AddChild(attackRotate);                     // 怪物朝向玩家
@@ -52,8 +56,12 @@ public class MonsterAI : BTTree
             BTParallel parallel = new BTParallel(BTParallel.ParallelFunction.And);
             {
                 parallel.AddChild(randomMoveDistance);         // 随机找一个移动地点
-                parallel.AddChild(monsterMoveRotate);          // 转向目的地
-                parallel.AddChild(move);                       // 进行移动
+                BTSequence rotateAndMove = new BTSequence();
+                {
+                    rotateAndMove.AddChild(monsterMoveRotate);
+                    rotateAndMove.AddChild(move);
+                }
+                parallel.AddChild(rotateAndMove);             // 怪物朝着目的地移动
             }
             randomMove.AddChild(parallel);                                 
         } 

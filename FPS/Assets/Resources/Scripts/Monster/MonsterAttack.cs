@@ -6,9 +6,11 @@ public class MonsterAttack : BTAction
 {
     protected float ATK;                     // 攻击力
     protected Transform trans;               // 怪物的Transform
+    protected bool isFirstEnter;
     public MonsterAttack(int atk,BTPrecondition precondition = null) : base(precondition)
     {
         ATK = atk;
+        isFirstEnter = true;
     }
     public override void Activate(Database database)
     {
@@ -39,7 +41,7 @@ public class MonsterLongDistanceAttacks : MonsterAttack
 {
     // 再次攻击冷却时间
     private float colddown = 2f;
-    private float lastTimeEvaluated = 0;  // 上次执行时间点
+    private float lastTimeEvaluated;  // 上次执行时间点
 
 
     public MonsterLongDistanceAttacks(int atk, BTPrecondition precondition = null) : base(atk, precondition)
@@ -50,16 +52,23 @@ public class MonsterLongDistanceAttacks : MonsterAttack
     public override void Activate(Database database)
     {
         base.Activate(database);
-        lastTimeEvaluated = Time.time;
     }
 
     protected override BTResult Execute()
     {
-        if(Time.time - lastTimeEvaluated > colddown)
+        if(isFirstEnter)
         {
             // 发射子弹
             GameObject bullet = Director.GetInstance().CurrentBulletFactory.GetBullet(trans, BulletOwner.Monster);
             lastTimeEvaluated = Time.time;
+            isFirstEnter = false;
+        }
+
+        if(Time.time - lastTimeEvaluated > colddown && !isFirstEnter)
+        {
+            // 发射子弹
+            GameObject bullet = Director.GetInstance().CurrentBulletFactory.GetBullet(trans, BulletOwner.Monster);
+            isFirstEnter = true;
             return BTResult.Ended;
         }
         return BTResult.Running;

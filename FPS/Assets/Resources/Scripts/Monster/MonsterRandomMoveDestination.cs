@@ -38,7 +38,7 @@ public class MonsterRandomMoveDistance : BTAction
         float z = Random.Range(-rangeZ, rangeZ);
         Vector3 destination = trans.position + new Vector3(x, 0, z); //dest world position
         database.SetData<Vector3>(destinationDataName, destination);
-        Debug.Log("随机移动:" + destination);
+        //Debug.Log("随机移动:" + destination);
         return BTResult.Ended;
     }
 }
