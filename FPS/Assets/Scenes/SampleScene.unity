@@ -591,6 +591,7 @@ GameObject:
   - component: {fileID: 563256110}
   - component: {fileID: 563256109}
   - component: {fileID: 563256114}
+  - component: {fileID: 563256115}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Monster
@@ -701,6 +702,20 @@ MonoBehaviour:
   database: {fileID: 0}
   isRunning: 1
   moveSpeed: 0.05
+--- !u!114 &563256115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563256108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a9840c9457f19947993607264427441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xOffset: 6
+  yOffset: 50
 --- !u!1 &588038421
 GameObject:
   m_ObjectHideFlags: 0
