@@ -11,7 +11,7 @@ public class MonsterWait : BTAction
 
     protected override void Enter()
     {
-        Debug.Log("静止");
+        //Debug.Log("静止");
         lastTimeEvaluated = Time.time;
     }
     /// <summary>
