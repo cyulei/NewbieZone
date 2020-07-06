@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class HealthManagemer : MonoBehaviour
 {
+    private void Start()
+    {
+        Director.GetInstance().CurrentHealthManagemer = this;
+    }
     public void AttackOtherObject(GameObject other,int ATK)
     {
         Health health = other.GetComponent<Health>();

@@ -25,8 +25,12 @@ public class Monster : MonoBehaviour
 
         haemalStrand.GetComponent<RectTransform>().position += new Vector3(xOffset, yOffset, zOffset);
 
+        // 初始化血条
         slider = haemalStrand.transform.Find("Slider").GetComponent<Slider>();
-
+        slider.minValue = myhealth.minHealth;
+        slider.maxValue = myhealth.maxHealth;
+        slider.value = myhealth.maxHealth;
+        myhealth.MyHealthChange += MonsterHealthChange;
     }
 
     // Update is called once per frame
@@ -41,5 +45,11 @@ public class Monster : MonoBehaviour
     private void UpdateHaemalStrand()
     {
         slider.gameObject.transform.LookAt(Camera.main.transform.position);
+    }
+
+    public void MonsterHealthChange(int health)
+    {
+        Debug.Log("怪物血条UI变化");
+        slider.value = health;
     }
 }

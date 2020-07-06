@@ -30,9 +30,11 @@ public class Bullet : MonoBehaviour
     [HideInInspector]
     public WeaponType bulletType;                  // 子弹类型
 
+    HealthManagemer healthManagemer;
     private void Start()
     {
         bulletType = WeaponType.Normal;
+        healthManagemer = Director.GetInstance().CurrentHealthManagemer;
     }
     private void Update()
     {
@@ -53,15 +55,21 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(healthManagemer == null)
+        {
+            healthManagemer = Director.GetInstance().CurrentHealthManagemer;
+        }
         if (bulletOwner == BulletOwner.Player && other.gameObject.tag == "Monster")
         {
+            healthManagemer.AttackOtherObject(other.gameObject, 10);
          //   Debug.Log("打中怪兽了");
-            HurtMonster(other.gameObject);
+         //   HurtMonster(other.gameObject);
             isHitGameobject = true;
         }
         else if(bulletOwner == BulletOwner.Monster && other.gameObject.tag == "Player")
         {
             //Debug.Log("打中玩家啦");
+            healthManagemer.AttackOtherObject(other.gameObject, 5);
             isHitGameobject = true;
         }
     }
