@@ -9,7 +9,7 @@ public class Director : System.Object
     public BulletFactory CurrentBulletFactory { get; set; }          // 子弹工厂
     public UserInput CurrentUserInput { get; set; }                  // 用户输入
     public WeaponsManager CurrentWeaponsManager { get; set; }        // 武器管理
-
+    public HealthManagemer CurrentHealthManagemer { get; set; }      // 血量管理
     public static Director GetInstance()
     {
         if (_instance == null)

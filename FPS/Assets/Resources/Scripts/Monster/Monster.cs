@@ -17,7 +17,7 @@ public class Monster : MonoBehaviour
     void Start()
     {
         // 生成血条
-        Health myhealth = gameObject.AddComponent<Health>();
+        Health myhealth = gameObject.GetComponent<Health>();
 
         GameObject haemalStrand = Instantiate(Resources.Load<GameObject>("Prefabs/MonsterHaemalStrand"), transform.position, Quaternion.identity) as GameObject;
         if (haemalStrand == null) Debug.LogError("初始化血条错误");
@@ -25,8 +25,17 @@ public class Monster : MonoBehaviour
 
         haemalStrand.GetComponent<RectTransform>().position += new Vector3(xOffset, yOffset, zOffset);
 
+        // 初始化血条
         slider = haemalStrand.transform.Find("Slider").GetComponent<Slider>();
-
+        slider.minValue = myhealth.minHealth;
+        slider.maxValue = myhealth.maxHealth;
+        slider.value = myhealth.maxHealth;
+        if(myhealth == null)
+        {
+            Debug.LogError("血量组件未初始化");
+        }
+        myhealth.MyHealthChange += MonsterHealthChange;
+        myhealth.NeedToDeath += MonsterDeath;
     }
 
     // Update is called once per frame
@@ -41,5 +50,16 @@ public class Monster : MonoBehaviour
     private void UpdateHaemalStrand()
     {
         slider.gameObject.transform.LookAt(Camera.main.transform.position);
+    }
+
+    public void MonsterHealthChange(int health)
+    {
+        //Debug.Log("怪物血条UI变化");
+        slider.value = health;
+    }
+
+    public void MonsterDeath()
+    {
+        Destroy(this.gameObject);
     }
 }

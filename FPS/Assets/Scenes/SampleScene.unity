@@ -592,6 +592,7 @@ GameObject:
   - component: {fileID: 563256109}
   - component: {fileID: 563256114}
   - component: {fileID: 563256115}
+  - component: {fileID: 563256116}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Monster
@@ -717,6 +718,20 @@ MonoBehaviour:
   xOffset: 0
   yOffset: 0.7
   zOffset: 0
+--- !u!114 &563256116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563256108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b352ee6c17f394099385e31f1f8e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minHealth: 0
+  maxHealth: 100
 --- !u!1 &588038421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,6 +1348,7 @@ GameObject:
   - component: {fileID: 1143523943}
   - component: {fileID: 1143523946}
   - component: {fileID: 1143523947}
+  - component: {fileID: 1143523948}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -1357,6 +1373,7 @@ MonoBehaviour:
   playerMoveSpeed: 5
   playerRotateSpeed: 2
   playerJumpSpeed: 2
+  slider: {fileID: 1953750371}
 --- !u!114 &1143523944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1418,6 +1435,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 925fdfdb73000e94b8d6e4d0fc40e207, type: 3}
   weapons: 020000000100000000000000
   switchWeaponCooldown: 0
+--- !u!114 &1143523948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143523942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084ed3843ba45e24ca2a297728dcf434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1191812032
 GameObject:
   m_ObjectHideFlags: 0
@@ -2534,7 +2563,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 236431335}
   m_HandleRect: {fileID: 0}

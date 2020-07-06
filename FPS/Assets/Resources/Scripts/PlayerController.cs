@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [Tooltip("玩家在项目中的物体")]
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     bool isJumping = false;   // 正在跳跃
     Vector3 originVelocity;   // 初始的竖直高度
 
+    public Slider slider;
     void Start()
     {
         director = Director.GetInstance();
@@ -29,6 +30,14 @@ public class PlayerController : MonoBehaviour
         playerCamera = player.transform.Find("Main Camera").gameObject;
 
         originVelocity = player.GetComponent<Rigidbody>().velocity;
+
+        // 初始化玩家血量
+        Health health = player.GetComponent<Health>();
+        health.MyHealthChange += PlayerHealthChange;
+        health.NeedToDeath += PlayerDeath;
+        slider.maxValue = health.maxHealth;
+        slider.minValue = health.minHealth;
+        slider.value = health.maxHealth;
     }
 
     void Update()
@@ -89,5 +98,15 @@ public class PlayerController : MonoBehaviour
             isJumping = true;
         }
 
+    }
+
+    public void PlayerHealthChange(int health)
+    {
+        slider.value = health;
+    }
+
+    public void PlayerDeath()
+    {
+        Debug.Log("游戏结束");
     }
 }

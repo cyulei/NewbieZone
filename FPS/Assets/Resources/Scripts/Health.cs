@@ -21,9 +21,16 @@ public class Health : MonoBehaviour
         else if (health < minHealth) _health = minHealth;
         else _health = health;
 
+        if(_health == minHealth)
+        {
+            NeedToDeath?.Invoke();
+        }
         MyHealthChange?.Invoke(_health);
     }
 
     public delegate void HealthChange(int health);
     public event HealthChange MyHealthChange;
+
+    public delegate void Death();
+    public event Death NeedToDeath;
 }
