@@ -25,8 +25,8 @@ public class Bullet : MonoBehaviour
     [HideInInspector]
     public Vector3 DirectionTowards { get; set; }  // 子弹移动到的目的地
 
-    bool isHitGameobject = false;                  // 是击中物体
-
+    protected bool isHitGameobject = false;                  // 是击中物体
+    protected bool isNeedToMove = true;
     [HideInInspector]
     public WeaponType bulletType;                  // 子弹类型
 
@@ -39,9 +39,12 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         startTime += Time.deltaTime;
-        Move();
+        if(isNeedToMove)
+            Move();
+
         if(endTime - startTime < 0.001f || isHitGameobject)
         {
+            Debug.Log("回收:" + endTime + "isHitGameobject:" + isHitGameobject);
             startTime = 0f;
             isHitGameobject = false;
             Director.GetInstance().CurrentBulletFactory.FreeBullet(this.gameObject);
@@ -61,21 +64,26 @@ public class Bullet : MonoBehaviour
         }
         if (bulletOwner == BulletOwner.Player && other.gameObject.tag == "Monster")
         {
-            healthManagemer.AttackOtherObject(other.gameObject, 20);
+            AttackOther(other.gameObject, 0);
          //   Debug.Log("打中怪兽了");
-         //   HurtMonster(other.gameObject);
-            isHitGameobject = true;
+            HurtExtraEffect(other.gameObject);
+            UpdateHitStatus();
         }
         else if(bulletOwner == BulletOwner.Monster && other.gameObject.tag == "Player")
         {
             //Debug.Log("打中玩家啦");
-            healthManagemer.AttackOtherObject(other.gameObject, 20);
-            isHitGameobject = true;
+            AttackOther(other.gameObject, 0);
+            HurtExtraEffect(other.gameObject);
+            UpdateHitStatus();
         }
     }
 
-    protected virtual void HurtMonster(GameObject monster)
+    protected virtual void HurtExtraEffect(GameObject monster) { }
+
+    public void AttackOther(GameObject gameObject,int hurt)
     {
-        Destroy(monster);
+        healthManagemer.AttackOtherObject(gameObject, hurt);
     }
+
+    protected virtual void UpdateHitStatus() { isHitGameobject = true; }
 }

@@ -10,6 +10,10 @@ public class HealthManagemer : MonoBehaviour
     }
     public void AttackOtherObject(GameObject other,int ATK)
     {
+        if(other == null)
+        {
+            return;
+        }
         Health health = other.GetComponent<Health>();
         if(health == null)
         {

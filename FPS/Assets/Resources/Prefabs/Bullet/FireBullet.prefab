@@ -104,8 +104,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2047a5dc75ae2664487e88006a1142b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletOwner: 0
+  Effect: {fileID: 1980661158355753691, guid: 5480623e1f3bd394b901a990af9eb199, type: 3}
   bulletMoveSpeed: 10
   startTime: 0
   endTime: 5
   bulletType: 0
-  Effect: {fileID: 1980661158355753691, guid: 5480623e1f3bd394b901a990af9eb199, type: 3}
+  fireHurt: 20
+  fireTimes: 3
+  fireIntervalTime: 1
