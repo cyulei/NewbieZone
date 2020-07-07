@@ -75,4 +75,9 @@ public class MonsterMove : BTAction
         Vector3 direction = (destination - trans.position).normalized;
         trans.position += direction * speed;
     }
+
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
 }

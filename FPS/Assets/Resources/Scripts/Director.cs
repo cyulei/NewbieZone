@@ -10,6 +10,7 @@ public class Director : System.Object
     public UserInput CurrentUserInput { get; set; }                  // 用户输入
     public WeaponsManager CurrentWeaponsManager { get; set; }        // 武器管理
     public HealthManagemer CurrentHealthManagemer { get; set; }      // 血量管理
+    public AttackExtraEffectTool CurrentAttackExtraEffectTool { get; set; }      // 子弹额外效果
     public static Director GetInstance()
     {
         if (_instance == null)

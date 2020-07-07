@@ -44,7 +44,7 @@ public class Bullet : MonoBehaviour
 
         if(endTime - startTime < 0.001f || isHitGameobject)
         {
-            Debug.Log("回收:" + endTime + "isHitGameobject:" + isHitGameobject);
+            //Debug.Log("回收:" + endTime + "isHitGameobject:" + isHitGameobject);
             startTime = 0f;
             isHitGameobject = false;
             Director.GetInstance().CurrentBulletFactory.FreeBullet(this.gameObject);
@@ -67,14 +67,14 @@ public class Bullet : MonoBehaviour
             AttackOther(other.gameObject, 0);
          //   Debug.Log("打中怪兽了");
             HurtExtraEffect(other.gameObject);
-            UpdateHitStatus();
+            isHitGameobject = true;
         }
         else if(bulletOwner == BulletOwner.Monster && other.gameObject.tag == "Player")
         {
             //Debug.Log("打中玩家啦");
-            AttackOther(other.gameObject, 0);
+            AttackOther(other.gameObject, 10);
             HurtExtraEffect(other.gameObject);
-            UpdateHitStatus();
+            isHitGameobject = true;
         }
     }
 
@@ -85,5 +85,4 @@ public class Bullet : MonoBehaviour
         healthManagemer.AttackOtherObject(gameObject, hurt);
     }
 
-    protected virtual void UpdateHitStatus() { isHitGameobject = true; }
 }

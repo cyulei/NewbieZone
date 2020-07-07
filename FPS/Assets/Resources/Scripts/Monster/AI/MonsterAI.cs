@@ -11,6 +11,7 @@ public class MonsterAI : BTTree
     [Tooltip("怪物的移动速度")]
     public float moveSpeed;
 
+    MonsterMove move;
     protected override void Init()
     {
         base.Init();
@@ -21,7 +22,7 @@ public class MonsterAI : BTTree
         MonsterCheckPlayerInRange playerNotInRange = new MonsterCheckPlayerInRange(5f, PLAYER_NAME,true);
 
         // 行为节点
-        MonsterMove move = new MonsterMove(DESTINATION, moveSpeed);
+        move = new MonsterMove(DESTINATION, moveSpeed);
         MonsterFindToTargetDestination findToTargetDestination = new MonsterFindToTargetDestination(PLAYER_NAME, PLAYERLOCATION,DESTINATION, 5f);
         MonsterWait monsterWait = new MonsterWait();
         MonsterLongDistanceAttacks monsterMeleeAttack = new MonsterLongDistanceAttacks(10);
@@ -66,5 +67,10 @@ public class MonsterAI : BTTree
             randomMove.AddChild(parallel);                                 
         } 
         root.AddChild(randomMove);
+    }
+
+    public void ChangeMoveSpeed(float speed)
+    {
+        move.SetSpeed(speed);
     }
 }
