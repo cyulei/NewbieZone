@@ -19,4 +19,12 @@ public class Director : System.Object
         }
         return _instance;
     }
+
+    public delegate void ChangeSceneEvent(SceneLevel level);
+    public event ChangeSceneEvent SceneChange;
+
+    public void SceneChangeNow(SceneLevel level)
+    {
+        SceneChange?.Invoke(level);
+    }
 }

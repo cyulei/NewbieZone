@@ -67,6 +67,17 @@ public class UserInput : MonoBehaviour
 
         Director.GetInstance().CurrentWeaponsManager.ChangeWeaponTypeByMouse(Input.GetAxis("Mouse ScrollWheel"));
 
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameObject uiController = GameObject.Find("UIController");
+            uiController.GetComponent<UIController>().ESCButtonDown();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            Debug.Log("当前场景为游戏场景");
+            Director.GetInstance().SceneChangeNow(SceneLevel.GameScene);
+        }
     }
 
     public float Clamp(float value, float max, float min)
