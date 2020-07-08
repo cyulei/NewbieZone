@@ -30,7 +30,6 @@ public class AttackExtraEffectTool : MonoBehaviour
                     else
                     {
                         attackEffects[i].StartEffect();
-                        attackEffects[i].currentTimes++;
                         attackEffects[i].isInterval = false;
                         attackEffects[i].currentIntervalTime = 0;
                         continue;
@@ -51,6 +50,7 @@ public class AttackExtraEffectTool : MonoBehaviour
                     }
                     else
                     {
+                        attackEffects[i].currentTimes++;
                         attackEffects[i].EndEffect();
                         attackEffects[i].isInterval = true;
                         attackEffects[i].currentContinueTime = 0;
@@ -142,11 +142,12 @@ public class FrozenEffect : AttackEffect
     }
     public override void StartEffect()
     {
-        Debug.Log("减速");
+        //Debug.Log("减速");
         monster.ChangeMoveSpeed(beforeMoveSpeed * _slowRate);
     }
     public override void EndEffect()
     {
+        //Debug.Log("结束减速");
         monster.ChangeMoveSpeed(beforeMoveSpeed);
     }
 }
