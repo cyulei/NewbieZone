@@ -6,7 +6,8 @@ public class MonsterAttack : BTAction
 {
     protected float ATK;                     // 攻击力
     protected Transform trans;               // 怪物的Transform
-    protected bool isFirstEnter;
+    protected bool isFirstEnter;             // 是否是第一次攻击
+
     public MonsterAttack(int atk,BTPrecondition precondition = null) : base(precondition)
     {
         ATK = atk;
@@ -20,6 +21,9 @@ public class MonsterAttack : BTAction
     }
 }
 
+/// <summary>
+/// 怪兽进程攻击
+/// </summary>
 public class MonsterMeleeAttack : MonsterAttack
 {
     public MonsterMeleeAttack(int atk, BTPrecondition precondition = null) : base(atk , precondition)
@@ -37,9 +41,12 @@ public class MonsterMeleeAttack : MonsterAttack
     }
 }
 
+/// <summary>
+/// 怪兽远程攻击
+/// </summary>
 public class MonsterLongDistanceAttacks : MonsterAttack
 {
-    // 再次攻击冷却时间
+    // 再次发射子弹冷却时间
     private float colddown = 2f;
     private float lastTimeEvaluated;  // 上次执行时间点
 
@@ -64,11 +71,12 @@ public class MonsterLongDistanceAttacks : MonsterAttack
             isFirstEnter = false;
         }
 
+        // 间隔几秒后再次发射子弹
         if(Time.time - lastTimeEvaluated > colddown && !isFirstEnter)
         {
             // 发射子弹
             GameObject bullet = Director.GetInstance().CurrentBulletFactory.GetBullet(trans, BulletOwner.Monster);
-            isFirstEnter = true;
+            lastTimeEvaluated = Time.time;
             return BTResult.Ended;
         }
         return BTResult.Running;

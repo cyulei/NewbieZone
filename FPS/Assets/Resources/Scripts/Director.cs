@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿
 public class Director : System.Object
 {
     private static Director _instance;             //导演类的实例
@@ -11,6 +8,8 @@ public class Director : System.Object
     public WeaponsManager CurrentWeaponsManager { get; set; }        // 武器管理
     public HealthManagemer CurrentHealthManagemer { get; set; }      // 血量管理
     public AttackExtraEffectTool CurrentAttackExtraEffectTool { get; set; }      // 子弹额外效果
+    public SceneController CurrentSceneController { get; set; }      // 场景控制器
+    public UIController CurrentUIController { get; set; }            // UI控制器
     public static Director GetInstance()
     {
         if (_instance == null)
@@ -18,13 +17,5 @@ public class Director : System.Object
             _instance = new Director();
         }
         return _instance;
-    }
-
-    public delegate void ChangeSceneEvent(SceneLevel level);
-    public event ChangeSceneEvent SceneChange;
-
-    public void SceneChangeNow(SceneLevel level)
-    {
-        SceneChange?.Invoke(level);
     }
 }

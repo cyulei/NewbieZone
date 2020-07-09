@@ -12,8 +12,8 @@ public class Database : MonoBehaviour
     /// <summary>
     /// 查找数据通过string
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="dataName"></param>
+    /// <typeparam name="T">数据类型</typeparam>
+    /// <param name="dataName">数据名称</param>
     /// <returns></returns>
     public T GetData<T>(string dataName)
     {
@@ -24,20 +24,9 @@ public class Database : MonoBehaviour
     }
 
     /// <summary>
-    /// 查找数据直接通过ID
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="dataId"></param>
-    /// <returns></returns>
-    //public T GetData<T>(int dataId)
-    //{
-    //    return (T)database[dataId];
-    //}
-
-    /// <summary>
     /// 设置数据的值
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">数据类型</typeparam>
     /// <param name="dataName">所设置的string类型key</param>
     /// <param name="data">所设置的值</param>
     public void SetData<T>(string dataName, T data)
@@ -47,20 +36,9 @@ public class Database : MonoBehaviour
     }
 
     /// <summary>
-    /// 设置数据的值
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="dataId">所设置的int类型key</param>
-    /// <param name="data">所设置的值</param>
-    //public void SetData<T>(int dataId, T data)
-    //{
-    //    database[dataId] = (object)data;
-    //}
-
-    /// <summary>
     /// 获得数据ID
     /// </summary>
-    /// <param name="dataName"></param>
+    /// <param name="dataName">所设置的string类型key</param>
     /// <returns></returns>
     public int GetDataId(string dataName)
     {
@@ -79,7 +57,7 @@ public class Database : MonoBehaviour
     /// <summary>
     /// 查找对应string
     /// </summary>
-    /// <param name="dataName"></param>
+    /// <param name="dataName">所设置的string类型key</param>
     /// <returns></returns>
     private int IndexOfDataId(string dataName)
     {

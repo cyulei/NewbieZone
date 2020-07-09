@@ -25,6 +25,10 @@ public abstract class BTNode
 
     public BTNode() : this(null) { }
 
+    /// <summary>
+    /// 构造器
+    /// </summary>
+    /// <param name="precondition">运行该节点的条件</param>
     public BTNode(BTPrecondition precondition)
     {
         this.precondition = precondition;
@@ -66,7 +70,10 @@ public abstract class BTNode
         return activated && coolDownOK && (precondition == null || precondition.Check()) && DoEvaluate();
     }
 
-    // 检查冷却时间是否到了
+    /// <summary>
+    /// 检查冷却时间是否到了
+    /// </summary>
+    /// <returns></returns>
     private bool CheckTimer()
     {
         if (Time.time - lastTimeEvaluated > interval)
@@ -79,10 +86,18 @@ public abstract class BTNode
 
     protected virtual bool DoEvaluate() { return true; }
 
+    /// <summary>
+    /// 运行节点
+    /// </summary>
+    /// <returns>返回运行的结果</returns>
     public virtual BTResult Tick() { return BTResult.Ended; }
 
     public virtual void Clear() { }
 
+    /// <summary>
+    /// 添加子节点
+    /// </summary>
+    /// <param name="aNode">添加的节点</param>
     public virtual void AddChild(BTNode aNode)
     {
         if (children == null)
@@ -95,6 +110,10 @@ public abstract class BTNode
         }
     }
 
+    /// <summary>
+    /// 移除子节点
+    /// </summary>
+    /// <param name="aNode">需要移除的节点</param>
     public virtual void RemoveChild(BTNode aNode)
     {
         if (children != null && aNode != null)

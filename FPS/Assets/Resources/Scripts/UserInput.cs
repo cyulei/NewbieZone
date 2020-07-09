@@ -27,6 +27,20 @@ public class UserInput : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameObject uiController = GameObject.Find("MainController");
+            uiController.GetComponent<UIController>().ESCButtonDown();
+        }
+
+        if (Director.GetInstance().CurrentUIController != null && Director.GetInstance().CurrentUIController.isMenuOn)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            //Debug.Log("打开菜单");
+            return;
+        }
+
         //获取方向键的偏移量
         float translationX = Input.GetAxis("Horizontal");
         float translationZ = Input.GetAxis("Vertical");
@@ -66,18 +80,6 @@ public class UserInput : MonoBehaviour
         }
 
         Director.GetInstance().CurrentWeaponsManager.ChangeWeaponTypeByMouse(Input.GetAxis("Mouse ScrollWheel"));
-
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            GameObject uiController = GameObject.Find("UIController");
-            uiController.GetComponent<UIController>().ESCButtonDown();
-        }
-
-        if(Input.GetKeyDown(KeyCode.Z))
-        {
-            Debug.Log("当前场景为游戏场景");
-            Director.GetInstance().SceneChangeNow(SceneLevel.GameScene);
-        }
     }
 
     public float Clamp(float value, float max, float min)

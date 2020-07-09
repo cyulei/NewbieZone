@@ -5,37 +5,40 @@ using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
-    [Header("血量的偏移")]
+    [Header("血条显示的偏移值")]
     public float xOffset = 0f;
     public float yOffset = 0.7f;
     public float zOffset = 0f;
 
-    private Slider slider;
+    private Slider slider;           // 血条滑动条
 
-    private Camera mainCamera;
     // Start is called before the first frame update
     void Start()
     {
-        // 生成血条
-        Health myhealth = gameObject.GetComponent<Health>();
 
+        Health myhealth = gameObject.GetComponent<Health>();
+        if (myhealth == null)
+        {
+            Debug.LogError("血量组件未初始化");
+        }
+
+        // 生成血条
         GameObject haemalStrand = Instantiate(Resources.Load<GameObject>("Prefabs/MonsterHaemalStrand"), transform.position, Quaternion.identity) as GameObject;
         if (haemalStrand == null) Debug.LogError("初始化血条错误");
-        haemalStrand.transform.SetParent(transform);
 
+        // 将血条设置为子节点设置位置偏移
+        haemalStrand.transform.SetParent(transform);
         haemalStrand.GetComponent<RectTransform>().position += new Vector3(xOffset, yOffset, zOffset);
 
-        // 初始化血条
+        // 初始化血条属性
         slider = haemalStrand.transform.Find("Slider").GetComponent<Slider>();
         slider.minValue = myhealth.minHealth;
         slider.maxValue = myhealth.maxHealth;
         slider.value = myhealth.maxHealth;
-        if(myhealth == null)
-        {
-            Debug.LogError("血量组件未初始化");
-        }
-        myhealth.MyHealthChange += MonsterHealthChange;
-        myhealth.NeedToDeath += MonsterDeath;
+
+        // 健康值组件的事件监听
+        myhealth.MyHealthChange += MonsterHealthChange;   // 血量改变
+        myhealth.NeedToDeath += MonsterDeath;             // 血量为最小值
     }
 
     // Update is called once per frame
@@ -52,12 +55,18 @@ public class Monster : MonoBehaviour
         slider.gameObject.transform.LookAt(Camera.main.transform.position);
     }
 
+    /// <summary>
+    /// 怪兽血量改变
+    /// </summary>
+    /// <param name="health">当前健康值</param>
     public void MonsterHealthChange(int health)
     {
-        //Debug.Log("怪物血条UI变化");
         slider.value = health;
     }
 
+    /// <summary>
+    /// 怪兽血量达到最小值
+    /// </summary>
     public void MonsterDeath()
     {
         Destroy(this.gameObject);

@@ -11,7 +11,7 @@ public class MonsterAI : BTTree
     [Tooltip("怪物的移动速度")]
     public float moveSpeed;
 
-    MonsterMove move;
+    private MonsterMove move;         // 行为移动节点
     protected override void Init()
     {
         base.Init();
@@ -69,6 +69,10 @@ public class MonsterAI : BTTree
         root.AddChild(randomMove);
     }
 
+    /// <summary>
+    /// 设置移动速度
+    /// </summary>
+    /// <param name="speed">设置的速度</param>
     public void ChangeMoveSpeed(float speed)
     {
         move.SetSpeed(speed);

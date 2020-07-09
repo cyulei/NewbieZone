@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 子弹工厂
+/// </summary>
 public class BulletFactory : MonoBehaviour
 {
     private Bullet bullet = null;                        
@@ -13,6 +16,13 @@ public class BulletFactory : MonoBehaviour
         Director.GetInstance().CurrentBulletFactory = this;
     }
 
+    /// <summary>
+    /// 获取子弹
+    /// </summary>
+    /// <param name="shootingTransform">射击点</param>
+    /// <param name="bulletOwner">子弹的所属方</param>
+    /// <param name="weaponType">子弹的类型</param>
+    /// <returns></returns>
     public GameObject GetBullet(Transform shootingTransform, BulletOwner bulletOwner, WeaponType weaponType = WeaponType.Normal)
     {
         bullet = null;
@@ -39,15 +49,21 @@ public class BulletFactory : MonoBehaviour
         }
 
         bullet.transform.position = shootingTransform.position;
-        bullet.bulletOwner = bulletOwner;
+        // 设置子弹所属方
+        bullet.bulletOwner = bulletOwner;                
+        // 子弹向前发射
         bullet.GetComponent<Bullet>().DirectionTowards = shootingTransform.forward * 1000 - shootingTransform.position;
-        //添加到使用列表中
+        // 添加到使用列表中
         used.Add(bullet.GetComponent<Bullet>());
 
         bullet.gameObject.SetActive(true);
         return bullet.gameObject;
     }
 
+    /// <summary>
+    /// 回收子弹
+    /// </summary>
+    /// <param name="bullet">子弹对象</param>
     public void FreeBullet(GameObject bullet)
     {
   //      Debug.Log("used数量:" + used.Count);
