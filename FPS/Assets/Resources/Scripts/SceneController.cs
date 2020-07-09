@@ -8,9 +8,14 @@ public class SceneController : MonoBehaviour
     private SceneLevel _currentSceneLevel;    // 当前所处场景
     public SceneLevel CurrentSceneLevel { get { return _currentSceneLevel; } }
 
+    [Header("场景名称")]
+    public string STARTSCENE = "StartScene";
+    public string PLAYSCENE = "SampleScene";
+
     private void Start()
     {
         Director.GetInstance().CurrentSceneController = this;
+        SceneManager.sceneLoaded += SceneChangeCallback;
     }
 
     // 场景改变委托和事件
@@ -33,28 +38,31 @@ public class SceneController : MonoBehaviour
     /// </summary>
     public void GotoPlayGameScene()
     {
-        //Debug.Log("开始游戏");
         SceneManager.LoadScene(1);
-        StartCoroutine(Delay(SceneLevel.GameScene));
     }
 
+    /// <summary>
+    /// 场景改变的回调函数
+    /// </summary>
+    /// <param name="scene"></param>
+    /// <param name="mode"></param>
+    void SceneChangeCallback(Scene scene,LoadSceneMode mode)
+    {
+       //Debug.Log(scene.name + "is load complete");
+        if(scene.name == STARTSCENE)
+        {
+            SceneChangeNow(SceneLevel.StartScene);
+        }
+        else if(scene.name == PLAYSCENE)
+        {
+            SceneChangeNow(SceneLevel.GameScene);
+        }
+    }
     /// <summary>
     /// 去开始游戏场景
     /// </summary>
     public void GotoStartScene()
     {
         SceneManager.LoadScene(0);
-        StartCoroutine(Delay(SceneLevel.StartScene));
-    }
-
-    /// <summary>
-    /// 用于延迟发送场景改变通知 使得场景先初始化
-    /// </summary>
-    /// <param name="sceneLevel">当前场景</param>
-    /// <returns></returns>
-    IEnumerator Delay(SceneLevel sceneLevel)
-    {
-        yield return new WaitForSeconds(0.07f);
-        SceneChangeNow(sceneLevel);
     }
 }
