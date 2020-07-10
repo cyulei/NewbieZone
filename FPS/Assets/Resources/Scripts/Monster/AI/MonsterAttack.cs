@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterAttack : BTAction
 {
-    protected float ATK;                     // 攻击力
+    protected int ATK;                     // 攻击力
     protected Transform trans;               // 怪物的Transform
     protected bool isFirstEnter;             // 是否是第一次攻击
 
@@ -36,7 +36,10 @@ public class MonsterMeleeAttack : MonsterAttack
     {
         // 玩家掉血 TODO:
         // 播放动画
-        Debug.Log("正在攻击玩家");
+        //Debug.Log("正在攻击玩家");
+
+        Director.GetInstance().CurrentHealthManagemer.AttackOtherObject(GameObject.Find("Player"), ATK);
+
         return BTResult.Ended;
     }
 }
@@ -67,6 +70,7 @@ public class MonsterLongDistanceAttacks : MonsterAttack
         {
             // 发射子弹
             GameObject bullet = Director.GetInstance().CurrentBulletFactory.GetBullet(trans, BulletOwner.Monster);
+            bullet.GetComponent<Bullet>().hurt = ATK;
             lastTimeEvaluated = Time.time;
             isFirstEnter = false;
         }

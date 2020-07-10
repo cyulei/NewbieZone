@@ -72,3 +72,10 @@ public class Monster : MonoBehaviour
         Destroy(this.gameObject);
     }
 }
+
+public enum MonsterType
+{
+    LongDistanceAttack,
+    MeleeAttack,
+    MixedAttack
+}

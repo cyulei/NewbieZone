@@ -61,7 +61,7 @@ public class MonsterFindToTargetDestination : BTAction
             Vector3 direction = offset.normalized;
             Vector3 destination = trans.position + offset - attackDistance * direction;  // 走到攻击范围圈上即可
             database.SetData<Vector3>(destinationDataName, destination);
-            Debug.Log("去攻击:" + destination);
+            //Debug.Log("去攻击:" + destination);
             return BTResult.Running;
         }
         return BTResult.Ended;
