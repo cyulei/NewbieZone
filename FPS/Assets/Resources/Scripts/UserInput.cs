@@ -33,7 +33,7 @@ public class UserInput : MonoBehaviour
             uiController.GetComponent<UIController>().ESCButtonDown();
         }
 
-        if (Director.GetInstance().CurrentUIController != null && Director.GetInstance().CurrentUIController.isMenuOn)
+        if ((Director.GetInstance().CurrentUIController != null && Director.GetInstance().CurrentUIController.isMenuOn) || Director.GetInstance().CurrentSceneController.CurrentSceneLevel == SceneLevel.EndScene)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

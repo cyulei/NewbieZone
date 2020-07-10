@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerDeath()
     {
-        Debug.Log("游戏结束");
+        //Debug.Log("游戏结束");
+        director.CurrentSceneController.GotoEndScene(false);
     }
 }

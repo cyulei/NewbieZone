@@ -11,18 +11,28 @@ public enum SceneLevel
 }
 public class UIController : MonoBehaviour
 {
+    [Header("每个场景的UI名称")]
     public string ContinueUIName = "Menu";
     public string GameplayUIName = "GameplayUI";
+    public string EndGameUIName = "EndCanvas";
+    public string EndGameUIRestartButtonName = "RestartButton";
+    public string EndGameUIEndTextName = "EndText";
     public string ContinueUIContinueButtonName = "ContinueButton";
     public string ContinueUIReturnStartName = "ReturnStart";
     public string StartUIName = "StartCanvas";
     public string StartUIStartButtonName = "StartButton";
+
+    [Header("显示玩家是否获胜标语")]
+    public string Win = "恭喜！获胜";
+    public string Lose = "遗憾！失败";
 
     private SceneLevel sceneLevel;   // 当前所处场景
 
     GameObject gameplayUI;
     GameObject ContinueUI;
     GameObject StartUI;
+    GameObject EndGameUI;
+
     public bool isMenuOn = false;     // 暂停UI是否染出
 
     public static UIController Instance = null;    // 保证每个场景只有一个
@@ -70,7 +80,22 @@ public class UIController : MonoBehaviour
         }
         else if(sceneLevel == SceneLevel.EndScene)
         {
+            // 显示鼠标
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
 
+            EndGameUI = GameObject.Find(EndGameUIName);
+            Button restartButton = EndGameUI.transform.Find(EndGameUIRestartButtonName).GetComponent<Button>();
+            restartButton.onClick.RemoveAllListeners();
+            restartButton.onClick.AddListener(GotoPlayGameScene);
+            Button returnStartButton = EndGameUI.transform.Find(ContinueUIReturnStartName).GetComponent<Button>();
+            returnStartButton.onClick.RemoveAllListeners();
+            returnStartButton.onClick.AddListener(ReturnStartButtonClick);
+            Text text = EndGameUI.transform.Find(EndGameUIEndTextName).GetComponent<Text>();
+            if (Director.GetInstance().CurrentSceneController.isWin)
+                text.text = Win;
+            else
+                text.text = Lose;
         }
     }
 

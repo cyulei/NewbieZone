@@ -11,6 +11,7 @@ public class SceneController : MonoBehaviour
     [Header("场景名称")]
     public string STARTSCENE = "StartScene";
     public string PLAYSCENE = "SampleScene";
+    public string ENDSCENE = "EndScene";
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class SceneController : MonoBehaviour
     public delegate void ChangeSceneEvent(SceneLevel level);
     public event ChangeSceneEvent SceneChange;
 
+    public bool isWin;
     /// <summary>
     /// 改变场景
     /// </summary>
@@ -57,6 +59,10 @@ public class SceneController : MonoBehaviour
         {
             SceneChangeNow(SceneLevel.GameScene);
         }
+        else  if(scene.name == ENDSCENE)
+        {
+            SceneChangeNow(SceneLevel.EndScene);
+        }
     }
     /// <summary>
     /// 去开始游戏场景
@@ -64,5 +70,15 @@ public class SceneController : MonoBehaviour
     public void GotoStartScene()
     {
         SceneManager.LoadScene(0);
+    }
+
+    /// <summary>
+    /// 去结束场景
+    /// </summary>
+    /// <param name="isWin">是否获胜</param>
+    public void GotoEndScene(bool iswin)
+    {
+        SceneManager.LoadScene(2);
+        isWin = iswin;
     }
 }
