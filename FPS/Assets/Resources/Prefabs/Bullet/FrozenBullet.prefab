@@ -90,7 +90,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-1393389721030349083
 MonoBehaviour:
@@ -104,8 +104,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d37d6425931654cb541839fc3bc559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletMoveSpeed: 10
+  bulletOwner: 0
+  Effect: {fileID: 110226998752571543, guid: 4f3585552f83e1947b199302acde1203, type: 3}
+  bulletMoveSpeed: 12
   startTime: 0
   endTime: 5
+  hurt: 5
   bulletType: 0
-  Effect: {fileID: 110226998752571543, guid: 4f3585552f83e1947b199302acde1203, type: 3}
+  continueTime: 5
+  slowRate: 0.3

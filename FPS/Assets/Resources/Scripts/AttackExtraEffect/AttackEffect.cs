@@ -68,12 +68,15 @@ public class FrozenEffect : AttackEffect
     float beforeMoveSpeed;          // 没有作用效果之前的移动速度
     float _slowRate;                // 让对象减慢速度的百分比
 
-    MonsterAI monster;              // 只作用在怪兽身上
+    AIForMonster monster;              // 只作用在怪兽身上
 
     public FrozenEffect(int times, float IntervalTime, float ContinueTime, int ID, GameObject other, float slowRate = 1.0f) : base(times, IntervalTime, ContinueTime, ID, other)
     {
         _slowRate = slowRate;
-        monster = other.GetComponent<MonsterAI>();
+        if(other.gameObject.tag == "Monster")
+            monster = other.GetComponent<MonsterAI>();
+        else if(other.gameObject.tag == "Boss")
+            monster = other.GetComponent<BossAI>();
         beforeMoveSpeed = monster.moveSpeed;
     }
     public override void StartEffect()

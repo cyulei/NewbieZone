@@ -56,6 +56,10 @@ public class UserInput : MonoBehaviour
 
         UpdateCursorLock();
 
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Director.GetInstance().CurrentWeaponsManager.currentWeapon.Reload();
+        }
         if(Input.GetMouseButtonDown(0))
         {
             player.LaunchBullet();

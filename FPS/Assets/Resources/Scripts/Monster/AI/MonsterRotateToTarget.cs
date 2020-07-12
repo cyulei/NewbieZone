@@ -6,7 +6,7 @@ public class MonsterRotateToTarget : BTAction
 {
     protected Transform trans;               // 怪物的Transform
     protected string locationName;
-    private float rotateTime = 1.5f;
+    private float rotateTime = 0.7f;
     private float lastTimeEvaluated;  // 上次执行时间点
 
     private bool isFirstEnter;
@@ -36,7 +36,7 @@ public class MonsterRotateToTarget : BTAction
         Vector3 playerPosition = database.GetData<Vector3>(locationName);
         Vector3 offset = playerPosition - trans.position;
         Quaternion rot = Quaternion.LookRotation(offset);
-        trans.localEulerAngles = Vector3.Lerp(trans.localEulerAngles, new Vector3(rot.eulerAngles.x, rot.eulerAngles.y, rot.eulerAngles.z), (Time.time - lastTimeEvaluated) /rotateTime);
+        trans.localEulerAngles = Vector3.Lerp(trans.localEulerAngles, new Vector3(trans.localEulerAngles.x, rot.eulerAngles.y, trans.localEulerAngles.z), (Time.time - lastTimeEvaluated) /rotateTime);
 
         if (Time.time - lastTimeEvaluated > rotateTime)
         {

@@ -41,7 +41,7 @@ public class MonsterMove : BTAction
 
         if (CheckArrived())
         {
-            Debug.Log("到达目的地");
+            //Debug.Log("到达目的地");
             return BTResult.Ended;
         }
         MoveToDestination();

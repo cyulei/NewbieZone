@@ -12,6 +12,9 @@ public class Monster : MonoBehaviour
 
     private Slider slider;           // 血条滑动条
 
+    [Header("Audio")]
+    public AudioPlayer HitPlayer;
+    public AudioSource IdleSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +42,9 @@ public class Monster : MonoBehaviour
         // 健康值组件的事件监听
         myhealth.MyHealthChange += MonsterHealthChange;   // 血量改变
         myhealth.NeedToDeath += MonsterDeath;             // 血量为最小值
+
+        if (IdleSource != null)
+            IdleSource.time = Random.Range(0.0f, IdleSource.clip.length);
     }
 
     // Update is called once per frame
@@ -62,6 +68,12 @@ public class Monster : MonoBehaviour
     public void MonsterHealthChange(int health)
     {
         slider.value = health;
+        if(health <= 150 && gameObject.tag == "Boss")
+        {
+            gameObject.GetComponent<BossAI>().ShowAllHideMonsters();
+        }
+        if (HitPlayer != null)
+            HitPlayer.PlayRandom();
     }
 
     /// <summary>
@@ -69,6 +81,10 @@ public class Monster : MonoBehaviour
     /// </summary>
     public void MonsterDeath()
     {
+        if(gameObject.tag == "Boss")
+        {
+            Director.GetInstance().CurrentSceneController.GotoEndScene(true);
+        }
         Destroy(this.gameObject);
     }
 }

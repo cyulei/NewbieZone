@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7737957394914246569}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -90,7 +90,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7171499929787949084
 MonoBehaviour:
@@ -104,6 +104,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3eab8147159e944eadcc8f31ac2b754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletMoveSpeed: 10
+  bulletOwner: 0
+  Effect: {fileID: 8608183087981362249, guid: 4a464a572bf20cb4c88ba88ccbe47962, type: 3}
+  bulletMoveSpeed: 25
   startTime: 0
-  endTime: 5
+  endTime: 2
+  hurt: 10
+  bulletType: 0

@@ -10,6 +10,7 @@ public class MonsterRandomMoveDistance : BTAction
 
     private Transform trans;              // 当前怪物的位置
 
+    private Vector3 oringinTrans;
     /// <summary>
     /// 随机选择目的地移动
     /// </summary>
@@ -29,6 +30,7 @@ public class MonsterRandomMoveDistance : BTAction
     {
         base.Activate(database);
         trans = database.transform;
+        oringinTrans = trans.position;
     }
 
     protected override BTResult Execute()
@@ -36,7 +38,7 @@ public class MonsterRandomMoveDistance : BTAction
         
         float x = Random.Range(-rangeX, rangeX);
         float z = Random.Range(-rangeZ, rangeZ);
-        Vector3 destination = trans.position + new Vector3(x, 0, z); //dest world position
+        Vector3 destination = oringinTrans + new Vector3(x, 0, z); //dest world position
         database.SetData<Vector3>(destinationDataName, destination);
         //Debug.Log("随机移动:" + destination);
         return BTResult.Ended;

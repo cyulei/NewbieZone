@@ -13,6 +13,11 @@ public class SceneController : MonoBehaviour
     public string PLAYSCENE = "SampleScene";
     public string ENDSCENE = "EndScene";
 
+    public AudioSource BGMPlayer;
+    public AudioClip EndGameSound;
+    public AudioClip PlayGameSound;
+    public AudioClip StartGameSound;
+
     private void Start()
     {
         Director.GetInstance().CurrentSceneController = this;
@@ -40,6 +45,9 @@ public class SceneController : MonoBehaviour
     /// </summary>
     public void GotoPlayGameScene()
     {
+        BGMPlayer.clip = PlayGameSound;
+        BGMPlayer.loop = true;
+        BGMPlayer.Play();
         SceneManager.LoadScene(1);
     }
 
@@ -69,6 +77,9 @@ public class SceneController : MonoBehaviour
     /// </summary>
     public void GotoStartScene()
     {
+        BGMPlayer.clip = StartGameSound;
+        BGMPlayer.loop = true;
+        BGMPlayer.Play();
         SceneManager.LoadScene(0);
     }
 
@@ -78,6 +89,9 @@ public class SceneController : MonoBehaviour
     /// <param name="isWin">是否获胜</param>
     public void GotoEndScene(bool iswin)
     {
+        BGMPlayer.clip = EndGameSound;
+        BGMPlayer.loop = false;
+        BGMPlayer.Play();
         SceneManager.LoadScene(2);
         isWin = iswin;
     }

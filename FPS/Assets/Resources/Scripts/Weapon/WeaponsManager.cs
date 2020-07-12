@@ -14,7 +14,7 @@ public class WeaponsManager : MonoBehaviour
     [Tooltip("武器UI图片")]
     public List<Sprite> bulletSprites = new List<Sprite>();
     [Tooltip("玩家可以拥有的武器类型")]
-    public List<WeaponType> weapons = new List<WeaponType>();
+    public List<WeaponType> weaponTypes = new List<WeaponType>();
 
     [HideInInspector]
     public WeaponType CurrentWeaponType { get; private set; }
@@ -23,17 +23,23 @@ public class WeaponsManager : MonoBehaviour
     public float switchWeaponCooldown;
     private bool canChangeWeapon = false;
     private int currentWeaponCounter = 0;
+
+    public List<Weapon> myWeapons = new List<Weapon>();
+
+    public Weapon currentWeapon;
+
     void Start()
     {
         Director.GetInstance().CurrentWeaponsManager = this;
-        CurrentWeaponType = weapons[currentWeaponCounter];
+        CurrentWeaponType = weaponTypes[currentWeaponCounter];
+        currentWeapon = myWeapons[currentWeaponCounter];
         switchWeaponCooldown = 0;
     }
 
     private void Update()
     {
         switchWeaponCooldown += 1 * Time.deltaTime;
-        if (switchWeaponCooldown > 1.2f)
+        if (switchWeaponCooldown > 0.8f)
         {
             canChangeWeapon = true;
         }
@@ -45,7 +51,13 @@ public class WeaponsManager : MonoBehaviour
 
     private void WeanponChange(int typeIndex)
     {
-        CurrentWeaponType = weapons[typeIndex];
+        CurrentWeaponType = weaponTypes[typeIndex];
+        currentWeapon = myWeapons[typeIndex];
+
+
+        myWeapons[typeIndex].gameObject.SetActive(true);
+        myWeapons[typeIndex].Selected();
+
         WeaponTypeChange?.Invoke(typeIndex);
     }
 
@@ -70,12 +82,16 @@ public class WeaponsManager : MonoBehaviour
     {
         if (canChangeWeapon)
         {
+            // 检测换的枪是否有子弹TODO
             if (axis < 0)
             {
                 switchWeaponCooldown = 0;
 
+                myWeapons[currentWeaponCounter].ResetWeapon();
+                myWeapons[currentWeaponCounter].gameObject.SetActive(false);
+
                 currentWeaponCounter++;
-                if (currentWeaponCounter > weapons.Count - 1)
+                if (currentWeaponCounter > weaponTypes.Count - 1)
                 {
                     currentWeaponCounter = 0;
                 }
@@ -85,14 +101,22 @@ public class WeaponsManager : MonoBehaviour
             {
                 switchWeaponCooldown = 0;
 
+                myWeapons[currentWeaponCounter].ResetWeapon();
+                myWeapons[currentWeaponCounter].gameObject.SetActive(false);
+
                 currentWeaponCounter--;
                 if (currentWeaponCounter < 0)
                 {
-                    currentWeaponCounter = weapons.Count - 1;
+                    currentWeaponCounter = weaponTypes.Count - 1;
                 }
                 WeanponChange(currentWeaponCounter);
             }
         }
+    }
+
+    public void ChangeWeaponBulletClip(int currentBulletClipNumer, int singleBulletClipNumer)
+    {
+        WeaponBulletClipChange?.Invoke(currentBulletClipNumer, singleBulletClipNumer);
     }
 
     /// <summary>
@@ -101,4 +125,7 @@ public class WeaponsManager : MonoBehaviour
     /// <param name="typeIndex">武器序号</param>
     public delegate void ChangeWeaponTypeEvent(int typeIndex);
     public event ChangeWeaponTypeEvent WeaponTypeChange;
+
+    public delegate void ChangeWeaponBulletClipEvent(int currentBulletClipNumer,int singleBulletClipNumer);
+    public event ChangeWeaponBulletClipEvent WeaponBulletClipChange;
 }

@@ -90,7 +90,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-8237329695967945164
 MonoBehaviour:
@@ -106,9 +106,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletOwner: 0
   Effect: {fileID: 1980661158355753691, guid: 5480623e1f3bd394b901a990af9eb199, type: 3}
-  bulletMoveSpeed: 10
+  bulletMoveSpeed: 15
   startTime: 0
-  endTime: 5
+  endTime: 4
+  hurt: 10
   bulletType: 0
   fireHurt: 20
   fireTimes: 3

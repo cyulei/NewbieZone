@@ -29,6 +29,7 @@ public class BTSequence : BTNode
         }
         else
         {
+            //Debug.Log(children[0]);
             return children[0].Evaluate();
         }
     }

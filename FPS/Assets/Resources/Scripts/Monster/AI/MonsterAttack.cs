@@ -26,18 +26,13 @@ public class MonsterAttack : BTAction
 /// </summary>
 public class MonsterMeleeAttack : MonsterAttack
 {
-    public MonsterMeleeAttack(int atk, BTPrecondition precondition = null) : base(atk , precondition)
+    public MonsterMeleeAttack(int atk,BTPrecondition precondition = null) : base(atk , precondition)
     {
 
     }
-
-    // TODO:
     protected override BTResult Execute()
     {
-        // 玩家掉血 TODO:
-        // 播放动画
-        //Debug.Log("正在攻击玩家");
-
+        CameraShaker.Instance.Shake(0.2f, 0.05f * 7.0f);
         Director.GetInstance().CurrentHealthManagemer.AttackOtherObject(GameObject.Find("Player"), ATK);
 
         return BTResult.Ended;

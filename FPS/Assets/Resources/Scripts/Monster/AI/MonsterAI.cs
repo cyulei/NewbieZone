@@ -2,21 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterAI : BTTree
+public class MonsterAI : AIForMonster
 {
     private static string DESTINATION = "Destination";
     private static string PLAYERLOCATION = "Location";
     private static string PLAYER_NAME = "Player";
 
-
-
-    private MonsterMove move;         // 行为移动节点
-
     [Header("怪物属性")]
     [Tooltip("怪物类型")]
     public MonsterType myMonsterType;
-    [Tooltip("怪物的移动速度")]
-    public float moveSpeed;
     [Tooltip("怪物检测周围有玩家的半径")]
     public float checkPlayerRange;
     [Tooltip("怪物的近战攻击力")]
@@ -29,7 +23,6 @@ public class MonsterAI : BTTree
     [Header("怪兽移动范围")]
     public float moveX;
     public float moveZ;
-
 
     protected override void Init()
     {
@@ -97,12 +90,5 @@ public class MonsterAI : BTTree
         root.AddChild(randomMove);
     }
 
-    /// <summary>
-    /// 设置移动速度
-    /// </summary>
-    /// <param name="speed">设置的速度</param>
-    public void ChangeMoveSpeed(float speed)
-    {
-        move.SetSpeed(speed);
-    }
+
 }

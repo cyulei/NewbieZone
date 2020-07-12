@@ -73,7 +73,7 @@ public class Bullet : MonoBehaviour
             healthManagemer = Director.GetInstance().CurrentHealthManagemer;
         }
         // 如果是怪物并且是player的子弹
-        if (bulletOwner == BulletOwner.Player && other.gameObject.tag == "Monster")
+        if (bulletOwner == BulletOwner.Player && (other.gameObject.tag == "Monster" || other.gameObject.tag == "Boss"))
         {
             AttackOther(other.gameObject, hurt);         // 伤害
             HurtExtraEffect(other.gameObject);           // 除了伤害以外的其他效果
@@ -92,7 +92,14 @@ public class Bullet : MonoBehaviour
     /// 除了掉血以外的其他效果
     /// </summary>
     /// <param name="other">受击对象</param>
-    protected virtual void HurtExtraEffect(GameObject other) { }
+    protected virtual void HurtExtraEffect(GameObject other)
+    {
+        if(bulletType == WeaponType.Normal)
+        {
+            // 生成粒子效果
+            Instantiate(Effect, this.transform.position, Quaternion.identity);
+        }
+    }
 
     /// <summary>
     /// 对对象造成伤害

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MonsterCheckPlayerInRange : BTPrecondition
 {
-    private float searchRadius;
-    private string targetName;
+    protected float searchRadius;
+    protected string targetName;
 
-    private Transform trans;
-    private bool isReverse;
+    protected Transform trans;
+    protected bool isReverse;
 
     /// <summary>
     /// 条件：检查范围内是否有玩家

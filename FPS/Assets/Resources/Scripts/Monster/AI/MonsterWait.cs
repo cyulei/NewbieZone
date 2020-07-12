@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterWait : BTAction
 {
-    float waitTime = 2f;
+    float waitTime = 1f;
     float lastTimeEvaluated = 0f;
 
     public MonsterWait(BTPrecondition precondition = null) : base(precondition){ }

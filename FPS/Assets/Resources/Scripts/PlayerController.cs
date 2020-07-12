@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
+    [Header("音频")]
+    public AudioPlayer footAudioPlayer;
+    public AudioClip jumpAudioClip;
+    public AudioClip landAudioClip;
+
+    [Header("玩家属性")]
     [Tooltip("玩家在项目中的物体")]
     public GameObject player = null;
     [Tooltip("玩家发射子弹的位置")]
@@ -17,10 +23,13 @@ public class PlayerController : MonoBehaviour
     public float playerJumpSpeed = 5f;
 
     Director director;
-    bool isJumping = false;   // 正在跳跃
+    public bool isJumping = false;   // 正在跳跃
     Vector3 originVelocity;   // 初始的竖直高度
 
     public Slider slider;
+
+    [HideInInspector]
+    public float weaponMoveSpeed = 0f;
     void Start()
     {
         director = Director.GetInstance();
@@ -30,7 +39,7 @@ public class PlayerController : MonoBehaviour
         playerCamera = player.transform.Find("Main Camera").gameObject;
 
         originVelocity = player.GetComponent<Rigidbody>().velocity;
-
+        //Debug.Log("玩家初始originVelocity:" + originVelocity);
         // 初始化玩家血量
         Health health = player.GetComponent<Health>();
         health.MyHealthChange += PlayerHealthChange;
@@ -47,6 +56,12 @@ public class PlayerController : MonoBehaviour
         {
             player.transform.position = new Vector3(0, 15, 0);
         }
+
+        if (originVelocity == player.GetComponent<Rigidbody>().velocity && isJumping)
+        {
+            footAudioPlayer.PlayClip(landAudioClip, 0.8f, 1.1f);
+            isJumping = false;
+        }
     }
 
     //玩家移动
@@ -59,6 +74,11 @@ public class PlayerController : MonoBehaviour
         //移动
         player.transform.Translate(0, 0, translationZ * playerMoveSpeed * Time.deltaTime);
         player.transform.Translate(translationX * playerMoveSpeed * Time.deltaTime, 0, 0);
+
+        if (translationZ < 0.01f && translationX < 0.01f)
+            weaponMoveSpeed = 0f;
+        else
+            weaponMoveSpeed = Mathf.Max(translationZ * playerMoveSpeed * Time.deltaTime, translationX * playerMoveSpeed * Time.deltaTime);
     }
 
     public void RotationPlayerView(float rotationX, float rotationY)
@@ -82,17 +102,19 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("shootingPosition未设置射击点");
         }
-        GameObject bullet = director.CurrentBulletFactory.GetBullet(shootingPosition.transform,BulletOwner.Player, director.CurrentWeaponsManager.CurrentWeaponType);
+        director.CurrentWeaponsManager.currentWeapon.Fire(shootingPosition.transform);
     }
 
     public void PlayerJump()
     {
+        //Debug.Log("velocity:" + player.GetComponent<Rigidbody>().velocity);
         if(originVelocity == player.GetComponent<Rigidbody>().velocity)
         {
             isJumping = false;
         }
         if(!isJumping)
         {
+            footAudioPlayer.PlayClip(jumpAudioClip, 0.8f, 1.1f);
             player.GetComponent<Rigidbody>().velocity += new Vector3(0, 5, 0);
             player.GetComponent<Rigidbody>().AddForce(Vector3.up * playerJumpSpeed);
             isJumping = true;
@@ -109,5 +131,20 @@ public class PlayerController : MonoBehaviour
     {
         //Debug.Log("游戏结束");
         director.CurrentSceneController.GotoEndScene(false);
+    }
+
+    public void PlayFootstep()
+    {
+        footAudioPlayer.PlayRandom();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Debug.Log(collision.gameObject.tag);
+        if(collision.gameObject.tag == "Environment" && isJumping)
+        {
+            footAudioPlayer.PlayClip(landAudioClip, 0.8f, 1.1f);
+            isJumping = false;
+        }
     }
 }

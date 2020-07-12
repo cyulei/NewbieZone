@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
     public void SetHealth(int health)
     {
         //Debug.Log("血量变化");
-        if (health > maxHealth) _health = minHealth;
+        if (health > maxHealth) _health = maxHealth;
         else if (health < minHealth) _health = minHealth;
         else _health = health;
 
