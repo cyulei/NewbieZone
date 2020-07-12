@@ -13,6 +13,7 @@ public class Effect : MonoBehaviour
         startTime += Time.deltaTime;
         if(endTime - startTime < 0.001)
         {
+            Debug.Log("摧毁特效");
             Destroy(this.gameObject);
         }
     }

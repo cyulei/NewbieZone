@@ -20,17 +20,22 @@ public class BossAI : AIForMonster
     [Tooltip("怪兽可以远程攻击的距离")]
     public float ATKLongDistance;
 
+    [Header("Boss怪的附属小怪列表")]
     public List<GameObject> monsters;
 
     bool isShowHideMonsters = false;
+
     protected override void Init()
     {
         base.Init();
         root = new BTPrioritySelector();   // 根节点首先是一个选择器
 
         // 转移条件
+        // 远程攻击条件
         MonsterCheckPlayerInRangeAndRandomAttack longAttack = new MonsterCheckPlayerInRangeAndRandomAttack(checkPlayerRange, PLAYER_NAME, true);
+        // 进程攻击条件
         MonsterCheckPlayerInRangeAndRandomAttack meleeAttack = new MonsterCheckPlayerInRangeAndRandomAttack(checkPlayerRange, PLAYER_NAME, false);
+        // 静止条件
         MonsterCheckPlayerInRange playerNotInRange = new MonsterCheckPlayerInRange(checkPlayerRange, PLAYER_NAME, true);
 
         // 行为节点
@@ -51,6 +56,7 @@ public class BossAI : AIForMonster
             idle.AddChild(new BTAction());                  // 怪物静止
         }
         root.AddChild(idle);
+
         // 进程攻击(一个随机数并且玩家在攻击范围内)
         BTSequence meleeattack = new BTSequence(meleeAttack);
         {
@@ -62,7 +68,7 @@ public class BossAI : AIForMonster
                     rotateAndMove.AddChild(monsterMoveRotate);
                     rotateAndMove.AddChild(move);
                 }
-                parallel.AddChild(rotateAndMove);             // 怪物朝着目的地移动
+                parallel.AddChild(rotateAndMove);                   // 怪物朝着目的地移动
             }
             meleeattack.AddChild(parallel);
             meleeattack.AddChild(attackRotate);                     // 怪物朝向玩家
@@ -70,7 +76,7 @@ public class BossAI : AIForMonster
         }
         root.AddChild(meleeattack);
 
-        // 远程攻击
+        // 远程攻击(一个随机数并且玩家在攻击范围内)
         BTSequence attack = new BTSequence(longAttack);
         {
             BTParallel parallel = new BTParallel(BTParallel.ParallelFunction.Or);
@@ -81,15 +87,18 @@ public class BossAI : AIForMonster
                     rotateAndMove.AddChild(monsterMoveRotate);
                     rotateAndMove.AddChild(move);
                 }
-                parallel.AddChild(rotateAndMove);             // 怪物朝着目的地移动
+                parallel.AddChild(rotateAndMove);                   // 怪物朝着目的地移动
             }
             attack.AddChild(parallel);
-            attack.AddChild(attackRotate);                     // 怪物朝向玩家
+            attack.AddChild(attackRotate);                          // 怪物朝向玩家
             attack.AddChild(monsterLongDistanceAttacks);               // 进行攻击
         }
         root.AddChild(attack);
     }
 
+    /// <summary>
+    /// 召唤小怪
+    /// </summary>
     public void ShowAllHideMonsters()
     {
         if(isShowHideMonsters)

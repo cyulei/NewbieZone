@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 武器类型
+/// </summary>
 public enum WeaponType
 {
     Normal,
@@ -24,8 +27,9 @@ public class WeaponsManager : MonoBehaviour
     private bool canChangeWeapon = false;
     private int currentWeaponCounter = 0;
 
+    [Header("玩家可以拥有的武器")]
     public List<Weapon> myWeapons = new List<Weapon>();
-
+    [HideInInspector]
     public Weapon currentWeapon;
 
     void Start()
@@ -49,12 +53,16 @@ public class WeaponsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 改变武器
+    /// </summary>
+    /// <param name="typeIndex">改变的武器索引</param>
     private void WeanponChange(int typeIndex)
     {
         CurrentWeaponType = weaponTypes[typeIndex];
         currentWeapon = myWeapons[typeIndex];
 
-
+        // 显示当前武器
         myWeapons[typeIndex].gameObject.SetActive(true);
         myWeapons[typeIndex].Selected();
 
@@ -82,11 +90,12 @@ public class WeaponsManager : MonoBehaviour
     {
         if (canChangeWeapon)
         {
-            // 检测换的枪是否有子弹TODO
             if (axis < 0)
             {
+                // 还原冷却时间
                 switchWeaponCooldown = 0;
 
+                // 当前武器状态重置 隐藏
                 myWeapons[currentWeaponCounter].ResetWeapon();
                 myWeapons[currentWeaponCounter].gameObject.SetActive(false);
 
@@ -95,6 +104,7 @@ public class WeaponsManager : MonoBehaviour
                 {
                     currentWeaponCounter = 0;
                 }
+                // 改变武器
                 WeanponChange(currentWeaponCounter);
             }
             if (axis > 0)
@@ -114,6 +124,11 @@ public class WeaponsManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 触发更换弹夹事件
+    /// </summary>
+    /// <param name="currentBulletClipNumer">现在的子弹数量</param>
+    /// <param name="singleBulletClipNumer">弹夹子弹数量</param>
     public void ChangeWeaponBulletClip(int currentBulletClipNumer, int singleBulletClipNumer)
     {
         WeaponBulletClipChange?.Invoke(currentBulletClipNumer, singleBulletClipNumer);
@@ -126,6 +141,11 @@ public class WeaponsManager : MonoBehaviour
     public delegate void ChangeWeaponTypeEvent(int typeIndex);
     public event ChangeWeaponTypeEvent WeaponTypeChange;
 
+    /// <summary>
+    /// 更换弹夹委托
+    /// </summary>
+    /// <param name="currentBulletClipNumer">现在的子弹数量</param>
+    /// <param name="singleBulletClipNumer">弹夹子弹数量</param>
     public delegate void ChangeWeaponBulletClipEvent(int currentBulletClipNumer,int singleBulletClipNumer);
     public event ChangeWeaponBulletClipEvent WeaponBulletClipChange;
 }

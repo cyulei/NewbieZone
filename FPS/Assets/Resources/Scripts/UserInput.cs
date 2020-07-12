@@ -56,33 +56,21 @@ public class UserInput : MonoBehaviour
 
         UpdateCursorLock();
 
+        // 换弹
         if(Input.GetKeyDown(KeyCode.R))
         {
             Director.GetInstance().CurrentWeaponsManager.currentWeapon.Reload();
         }
+        // 开火
         if(Input.GetMouseButtonDown(0))
         {
             player.LaunchBullet();
         }
-
+        // 跳跃
         if(Input.GetButtonDown("Jump"))
         {
             player.PlayerJump();
         }
-
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Director.GetInstance().CurrentWeaponsManager.ChangeWeaponTypeByKeyborad(1);
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Director.GetInstance().CurrentWeaponsManager.ChangeWeaponTypeByKeyborad(2);
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Director.GetInstance().CurrentWeaponsManager.ChangeWeaponTypeByKeyborad(3);
-        }
-
         Director.GetInstance().CurrentWeaponsManager.ChangeWeaponTypeByMouse(Input.GetAxis("Mouse ScrollWheel"));
     }
 

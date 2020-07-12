@@ -12,13 +12,12 @@ public class Monster : MonoBehaviour
 
     private Slider slider;           // 血条滑动条
 
-    [Header("Audio")]
-    public AudioPlayer HitPlayer;
-    public AudioSource IdleSource;
+    [Header("怪物音频")]
+    public AudioPlayer audioPlayer;  // 音频播放器
+    public AudioSource idleSource;   // 怪物周围的声音
     // Start is called before the first frame update
     void Start()
     {
-
         Health myhealth = gameObject.GetComponent<Health>();
         if (myhealth == null)
         {
@@ -43,8 +42,8 @@ public class Monster : MonoBehaviour
         myhealth.MyHealthChange += MonsterHealthChange;   // 血量改变
         myhealth.NeedToDeath += MonsterDeath;             // 血量为最小值
 
-        if (IdleSource != null)
-            IdleSource.time = Random.Range(0.0f, IdleSource.clip.length);
+        if (idleSource != null)
+            idleSource.time = Random.Range(0.0f, idleSource.clip.length);
     }
 
     // Update is called once per frame
@@ -67,13 +66,18 @@ public class Monster : MonoBehaviour
     /// <param name="health">当前健康值</param>
     public void MonsterHealthChange(int health)
     {
+        // 改变血量
         slider.value = health;
+
+        // 当小于150血量，Boss会召唤其他小怪
         if(health <= 150 && gameObject.tag == "Boss")
         {
             gameObject.GetComponent<BossAI>().ShowAllHideMonsters();
         }
-        if (HitPlayer != null)
-            HitPlayer.PlayRandom();
+
+        // 播放被击中音频
+        if (audioPlayer != null)
+            audioPlayer.PlayRandom();
     }
 
     /// <summary>
@@ -81,6 +85,7 @@ public class Monster : MonoBehaviour
     /// </summary>
     public void MonsterDeath()
     {
+        // 如果是Boss死亡 则获胜
         if(gameObject.tag == "Boss")
         {
             Director.GetInstance().CurrentSceneController.GotoEndScene(true);
@@ -89,6 +94,9 @@ public class Monster : MonoBehaviour
     }
 }
 
+/// <summary>
+/// 怪物的类型
+/// </summary>
 public enum MonsterType
 {
     LongDistanceAttack,

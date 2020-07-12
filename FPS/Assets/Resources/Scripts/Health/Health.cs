@@ -5,8 +5,10 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     private int _health;
-    public int MyHealth { get { return _health; } }
+    public int MyHealth { get { return _health; } }   // 物体的血量
+    [Tooltip("物体最小血量")]
     public int minHealth = 0;
+    [Tooltip("物体最大血量")]
     public int maxHealth = 100;
 
 
@@ -29,9 +31,16 @@ public class Health : MonoBehaviour
         MyHealthChange?.Invoke(_health);
     }
 
+    /// <summary>
+    /// 血量变化事件
+    /// </summary>
+    /// <param name="health">改变的血量</param>
     public delegate void HealthChange(int health);
     public event HealthChange MyHealthChange;
 
+    /// <summary>
+    /// 血量达到最少
+    /// </summary>
     public delegate void Death();
     public event Death NeedToDeath;
 }

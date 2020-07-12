@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 行为树节点的进入条件
 public abstract class BTPrecondition : BTNode
 {
     public BTPrecondition() : base() { }

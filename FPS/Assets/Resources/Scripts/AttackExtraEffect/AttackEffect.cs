@@ -18,6 +18,14 @@ public class AttackEffect
 
     public bool isInterval = false;            // 是否在间隔时间
 
+    /// <summary>
+    /// 攻击额外效果
+    /// </summary>
+    /// <param name="times">实行几次</param>
+    /// <param name="IntervalTime">每次的间隔时间</param>
+    /// <param name="ContinueTime">每次的持续时间</param>
+    /// <param name="ID">额外效果的ID</param>
+    /// <param name="other">效果作用的对象</param>
     public AttackEffect(int times, float IntervalTime, float ContinueTime, int ID, GameObject other)
     {
         _times = times;
@@ -77,6 +85,8 @@ public class FrozenEffect : AttackEffect
             monster = other.GetComponent<MonsterAI>();
         else if(other.gameObject.tag == "Boss")
             monster = other.GetComponent<BossAI>();
+
+        // 需要获取怪物速度
         beforeMoveSpeed = monster.moveSpeed;
     }
     public override void StartEffect()

@@ -8,6 +8,12 @@ public class HealthManagemer : MonoBehaviour
     {
         Director.GetInstance().CurrentHealthManagemer = this;
     }
+
+    /// <summary>
+    /// 攻击其他物体
+    /// </summary>
+    /// <param name="other">攻击的物体</param>
+    /// <param name="ATK">攻击力</param>
     public void AttackOtherObject(GameObject other,int ATK)
     {
         if(other == null)

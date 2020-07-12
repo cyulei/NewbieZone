@@ -13,6 +13,7 @@ public class SceneController : MonoBehaviour
     public string PLAYSCENE = "SampleScene";
     public string ENDSCENE = "EndScene";
 
+    [Header("场景音乐")]
     public AudioSource BGMPlayer;
     public AudioClip EndGameSound;
     public AudioClip PlayGameSound;

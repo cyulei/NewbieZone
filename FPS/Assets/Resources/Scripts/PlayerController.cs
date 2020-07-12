@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public Slider slider;
 
     [HideInInspector]
-    public float weaponMoveSpeed = 0f;
+    public float weaponMoveSpeed = 0f;    // 移动速度（武器动画所需参数）
     void Start()
     {
         director = Director.GetInstance();
@@ -81,6 +81,11 @@ public class PlayerController : MonoBehaviour
             weaponMoveSpeed = Mathf.Max(translationZ * playerMoveSpeed * Time.deltaTime, translationX * playerMoveSpeed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// 旋转玩家视角
+    /// </summary>
+    /// <param name="rotationX"></param>
+    /// <param name="rotationY"></param>
     public void RotationPlayerView(float rotationX, float rotationY)
     {
         if (player == null)
@@ -96,6 +101,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 开火
+    /// </summary>
     public void LaunchBullet()
     {
         if(shootingPosition == null)
@@ -105,9 +113,11 @@ public class PlayerController : MonoBehaviour
         director.CurrentWeaponsManager.currentWeapon.Fire(shootingPosition.transform);
     }
 
+    /// <summary>
+    /// 玩家跳跃
+    /// </summary>
     public void PlayerJump()
     {
-        //Debug.Log("velocity:" + player.GetComponent<Rigidbody>().velocity);
         if(originVelocity == player.GetComponent<Rigidbody>().velocity)
         {
             isJumping = false;
@@ -119,20 +129,29 @@ public class PlayerController : MonoBehaviour
             player.GetComponent<Rigidbody>().AddForce(Vector3.up * playerJumpSpeed);
             isJumping = true;
         }
-
     }
 
+    /// <summary>
+    /// 玩家血量变换
+    /// </summary>
+    /// <param name="health">当前血量</param>
     public void PlayerHealthChange(int health)
     {
         slider.value = health;
     }
 
+    /// <summary>
+    /// 玩家死亡
+    /// </summary>
     public void PlayerDeath()
     {
         //Debug.Log("游戏结束");
         director.CurrentSceneController.GotoEndScene(false);
     }
 
+    /// <summary>
+    /// 播放脚步声
+    /// </summary>
     public void PlayFootstep()
     {
         footAudioPlayer.PlayRandom();
@@ -140,7 +159,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log(collision.gameObject.tag);
+        // 如果与场景碰撞则意味着跳下落下 播放着陆音乐
         if(collision.gameObject.tag == "Environment" && isJumping)
         {
             footAudioPlayer.PlayClip(landAudioClip, 0.8f, 1.1f);
