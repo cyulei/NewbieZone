@@ -21,6 +21,7 @@ public class UIController : MonoBehaviour
     public string ContinueUIReturnStartName = "ReturnStart";
     public string StartUIName = "StartCanvas";
     public string StartUIStartButtonName = "StartButton";
+    public string WaitTextName = "WaitText";
 
     [Header("显示玩家是否获胜标语")]
     public string Win = "恭喜！获胜";
@@ -33,6 +34,9 @@ public class UIController : MonoBehaviour
     GameObject StartUI;
     GameObject EndGameUI;
 
+    GameObject WaitText;
+
+    [HideInInspector]
     public bool isMenuOn = false;     // 暂停UI是否染出
 
     public static UIController Instance = null;    // 保证每个场景只有一个
@@ -68,6 +72,9 @@ public class UIController : MonoBehaviour
             Button startButton = StartUI.transform.Find(StartUIStartButtonName).GetComponent<Button>();
             startButton.onClick.RemoveAllListeners();
             startButton.onClick.AddListener(GotoPlayGameScene);
+
+            WaitText = StartUI.transform.Find(WaitTextName).gameObject;
+            WaitText.SetActive(false);
         }
         else if(sceneLevel == SceneLevel.GameScene)
         {
@@ -96,6 +103,9 @@ public class UIController : MonoBehaviour
                 text.text = Win;
             else
                 text.text = Lose;
+
+            WaitText = EndGameUI.transform.Find(WaitTextName).gameObject;
+            WaitText.SetActive(false);
         }
     }
 
@@ -159,6 +169,7 @@ public class UIController : MonoBehaviour
     /// </summary>
     void GotoPlayGameScene()
     {
+        WaitText.SetActive(true);
         Director.GetInstance().CurrentSceneController.GotoPlayGameScene();
     }
 }

@@ -8,7 +8,7 @@ public class MonsterMove : BTAction
 
     private float speed;                   // 移动速度
     private Vector3 destination;           // 移动到的目的地位置
-    private float tolerance = 0.01f;       // 移动到目标地址的容错率
+    private float tolerance = 0.1f;       // 移动到目标地址的容错率
 
     private Transform trans;               // 怪物的Transform
 
@@ -63,7 +63,6 @@ public class MonsterMove : BTAction
     private bool CheckArrived()
     {
         Vector3 offset = destination - trans.position;
-
         return offset.sqrMagnitude < tolerance * tolerance;
     }
 

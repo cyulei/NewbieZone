@@ -61,8 +61,8 @@ public class UserInput : MonoBehaviour
         {
             Director.GetInstance().CurrentWeaponsManager.currentWeapon.Reload();
         }
-        // 开火
-        if(Input.GetMouseButtonDown(0))
+        // 开火（连续开火）
+        if(Input.GetButton("Fire1"))
         {
             player.LaunchBullet();
         }

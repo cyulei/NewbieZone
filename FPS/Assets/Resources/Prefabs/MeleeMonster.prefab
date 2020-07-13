@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3245183890413355967}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0.2, y: 2.16, z: 0.6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_Children:
   - {fileID: 7322872317214624022}
   - {fileID: 3882433554588943963}
@@ -82,8 +82,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   database: {fileID: 0}
   isRunning: 1
-  myMonsterType: 1
   moveSpeed: 0.05
+  myMonsterType: 1
   checkPlayerRange: 7
   meleeATK: 5
   longDistanceATK: 0
@@ -105,8 +105,8 @@ MonoBehaviour:
   xOffset: 0
   yOffset: 2.2
   zOffset: 0.28
-  HitPlayer: {fileID: 7079753263483663917}
-  IdleSource: {fileID: 6928842344270369023}
+  audioPlayer: {fileID: 0}
+  idleSource: {fileID: 0}
 --- !u!114 &3245183890413355952
 MonoBehaviour:
   m_ObjectHideFlags: 0
