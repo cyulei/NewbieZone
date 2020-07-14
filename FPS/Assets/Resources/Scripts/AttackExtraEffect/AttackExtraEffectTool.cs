@@ -101,4 +101,15 @@ public class AttackExtraEffectTool : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// 生成额外粒子效果
+    /// </summary>
+    /// <param name="path">路径</param>
+    /// <param name="position">位置</param>
+    public void InstantiateEffect(string path,Vector3 position)
+    {
+        // 播放火焰特效
+        Instantiate(Resources.Load(path), position, Quaternion.identity);
+    }
 }

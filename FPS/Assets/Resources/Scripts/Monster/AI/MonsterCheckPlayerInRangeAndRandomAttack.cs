@@ -21,7 +21,7 @@ public class MonsterCheckPlayerInRangeAndRandomAttack : MonsterCheckPlayerInRang
     {
         isLongDistance = isLongdistance;
         random = Random.Range(0, 10);
-        randomTime = 6f;
+        randomTime = 5f;
         nowTime = Time.time;
     }
 

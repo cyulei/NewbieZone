@@ -25,6 +25,10 @@ public class BossAI : AIForMonster
 
     bool isShowHideMonsters = false;
 
+    [Header("怪兽移动范围")]
+    public float moveX;
+    public float moveZ;
+
     protected override void Init()
     {
         base.Init();
@@ -50,12 +54,24 @@ public class BossAI : AIForMonster
         MonsterRotateToTarget monsterMoveRotate = new MonsterRotateToTarget(DESTINATION);
         MonsterRotateToTarget attackRotate = new MonsterRotateToTarget(PLAYERLOCATION);
 
-        // 静止（不在攻击范围内）
-        BTSequence idle = new BTSequence(playerNotInRange);
+        MonsterRandomMoveDistance randomMoveDistance = new MonsterRandomMoveDistance(DESTINATION, moveX, moveZ);
+
+        // 随机巡逻（玩家不在攻击范围）
+        BTSequence randomMove = new BTSequence(playerNotInRange);
         {
-            idle.AddChild(new BTAction());                  // 怪物静止
+            BTParallel parallel = new BTParallel(BTParallel.ParallelFunction.And);
+            {
+                parallel.AddChild(randomMoveDistance);         // 随机找一个移动地点
+                BTSequence rotateAndMove = new BTSequence();
+                {
+                    rotateAndMove.AddChild(monsterMoveRotate);
+                    rotateAndMove.AddChild(move);
+                }
+                parallel.AddChild(rotateAndMove);             // 怪物朝着目的地移动
+            }
+            randomMove.AddChild(parallel);
         }
-        root.AddChild(idle);
+        root.AddChild(randomMove);
 
         // 进程攻击(一个随机数并且玩家在攻击范围内)
         BTSequence meleeattack = new BTSequence(meleeAttack);
@@ -77,7 +93,7 @@ public class BossAI : AIForMonster
         root.AddChild(meleeattack);
 
         // 远程攻击(一个随机数并且玩家在攻击范围内)
-        BTSequence attack = new BTSequence(longAttack);
+        BTSequence longattack = new BTSequence(longAttack);
         {
             BTParallel parallel = new BTParallel(BTParallel.ParallelFunction.Or);
             {
@@ -89,11 +105,11 @@ public class BossAI : AIForMonster
                 }
                 parallel.AddChild(rotateAndMove);                   // 怪物朝着目的地移动
             }
-            attack.AddChild(parallel);
-            attack.AddChild(attackRotate);                          // 怪物朝向玩家
-            attack.AddChild(monsterLongDistanceAttacks);               // 进行攻击
+            longattack.AddChild(parallel);
+            longattack.AddChild(attackRotate);                          // 怪物朝向玩家
+            longattack.AddChild(monsterLongDistanceAttacks);               // 进行攻击
         }
-        root.AddChild(attack);
+        root.AddChild(longattack);
     }
 
     /// <summary>

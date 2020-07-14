@@ -23,8 +23,6 @@ public class FireBullet : Bullet
     protected override void HurtExtraEffect(GameObject other)
     {
         base.HurtExtraEffect(other);
-        // 生成粒子效果
-        Instantiate(Effect, this.transform.position, Quaternion.identity);
         // 配置额外效果
         effectTool.AddEffect(new FireEffect(3, 2, 0, effectTool.EffectID, other, 10));
     }

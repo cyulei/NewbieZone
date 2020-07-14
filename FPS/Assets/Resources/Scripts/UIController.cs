@@ -22,6 +22,7 @@ public class UIController : MonoBehaviour
     public string StartUIName = "StartCanvas";
     public string StartUIStartButtonName = "StartButton";
     public string WaitTextName = "WaitText";
+    public string StartUIEndButtonName = "EndButton";
 
     [Header("显示玩家是否获胜标语")]
     public string Win = "恭喜！获胜";
@@ -68,13 +69,18 @@ public class UIController : MonoBehaviour
         if(sceneLevel == SceneLevel.StartScene)
         {
             StartUI = GameObject.Find(StartUIName);
-            // 为按钮增加监听事件
+            // 为开始游戏按钮增加监听事件
             Button startButton = StartUI.transform.Find(StartUIStartButtonName).GetComponent<Button>();
             startButton.onClick.RemoveAllListeners();
             startButton.onClick.AddListener(GotoPlayGameScene);
 
             WaitText = StartUI.transform.Find(WaitTextName).gameObject;
             WaitText.SetActive(false);
+
+            // 为退出游戏按钮增加监听事件
+            Button endButton = StartUI.transform.Find(StartUIEndButtonName).GetComponent<Button>();
+            endButton.onClick.RemoveAllListeners();
+            endButton.onClick.AddListener(ExitGame);
         }
         else if(sceneLevel == SceneLevel.GameScene)
         {
@@ -171,5 +177,11 @@ public class UIController : MonoBehaviour
     {
         WaitText.SetActive(true);
         Director.GetInstance().CurrentSceneController.GotoPlayGameScene();
+    }
+
+    void ExitGame()
+    {
+        Debug.Log("退出游戏");
+        Application.Quit();
     }
 }

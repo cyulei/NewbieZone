@@ -66,6 +66,10 @@ public class FireEffect : AttackEffect
 
     public override void StartEffect()
     {
+        if (_other == null)
+            return;
+        // 生成火焰效果
+        Director.GetInstance().CurrentAttackExtraEffectTool.InstantiateEffect("Prefabs/Effect/FireExplosion", _other.transform.position);
         // 让对象掉血
         Director.GetInstance().CurrentHealthManagemer.AttackOtherObject(_other, fireHurt);
     }
@@ -91,6 +95,8 @@ public class FrozenEffect : AttackEffect
     }
     public override void StartEffect()
     {
+        if (_other == null)
+            return;
         // 让怪物减速
         monster.ChangeMoveSpeed(beforeMoveSpeed * _slowRate);
     }
