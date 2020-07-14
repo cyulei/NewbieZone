@@ -30,6 +30,7 @@ public class MonsterRotateToTarget : BTAction
     {
         if(isFirstEnter)
         {
+            //Debug.Log("开始旋转");
             lastTimeEvaluated = Time.time;
             isFirstEnter = false;
         }

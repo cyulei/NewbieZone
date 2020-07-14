@@ -37,7 +37,7 @@ public class MonsterMove : BTAction
     protected override BTResult Execute()
     {
         UpdateDestination();
-     //   UpdateFaceDirection();
+        UpdateFaceDirection();
 
         if (CheckArrived())
         {
@@ -54,6 +54,15 @@ public class MonsterMove : BTAction
     private void UpdateDestination()
     {
         destination = database.GetData<Vector3>(destinationDataName);
+    }
+
+    // 需要在走的时候也更新朝向
+    private void UpdateFaceDirection()
+    {
+        Vector3 destination = database.GetData<Vector3>(destinationDataName);
+        Vector3 offset = destination - trans.position;
+        Quaternion rot = Quaternion.LookRotation(offset);
+        trans.localEulerAngles = new Vector3(trans.localEulerAngles.x, rot.eulerAngles.y, trans.localEulerAngles.z);
     }
 
     /// <summary>

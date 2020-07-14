@@ -804,6 +804,11 @@ PrefabInstance:
       propertyPath: idleSource
       value: 
       objectReference: {fileID: 286145004}
+    - target: {fileID: 6561115259278849126, guid: 31b25228504b20049ba9e337bf200306,
+        type: 3}
+      propertyPath: maxHealth
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b25228504b20049ba9e337bf200306, type: 3}
 --- !u!4 &286145003 stripped
@@ -1016,6 +1021,11 @@ PrefabInstance:
       propertyPath: idleSource
       value: 
       objectReference: {fileID: 338293587}
+    - target: {fileID: 6561115259278849126, guid: 31b25228504b20049ba9e337bf200306,
+        type: 3}
+      propertyPath: maxHealth
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b25228504b20049ba9e337bf200306, type: 3}
 --- !u!4 &338293586 stripped
@@ -1360,7 +1370,7 @@ MonoBehaviour:
   type: 1
   addBulletNumer: 10
   bulletAddPropClip: {fileID: 8300000, guid: 61507aebad0cf874aa8c0d42fcaa4e24, type: 3}
-  clipTextAnimator: {fileID: 1723660871}
+  clipTextAnimator: {fileID: 2079510764}
 --- !u!1 &497185873
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,6 +2167,11 @@ PrefabInstance:
       propertyPath: yOffset
       value: 1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 3245183890413355952, guid: f9f423768985cc04da81567626061ff2,
+        type: 3}
+      propertyPath: maxHealth
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9f423768985cc04da81567626061ff2, type: 3}
 --- !u!4 &744619815 stripped
@@ -2370,6 +2385,11 @@ PrefabInstance:
       propertyPath: idleSource
       value: 
       objectReference: {fileID: 805091365}
+    - target: {fileID: 6561115259278849126, guid: 31b25228504b20049ba9e337bf200306,
+        type: 3}
+      propertyPath: maxHealth
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b25228504b20049ba9e337bf200306, type: 3}
 --- !u!4 &805091363 stripped
@@ -2509,6 +2529,11 @@ PrefabInstance:
       propertyPath: idleSource
       value: 
       objectReference: {fileID: 824069298}
+    - target: {fileID: 6561115259278849126, guid: 31b25228504b20049ba9e337bf200306,
+        type: 3}
+      propertyPath: maxHealth
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b25228504b20049ba9e337bf200306, type: 3}
 --- !u!4 &824069297 stripped
@@ -12601,6 +12626,11 @@ PrefabInstance:
       propertyPath: yOffset
       value: 1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 3245183890413355952, guid: f9f423768985cc04da81567626061ff2,
+        type: 3}
+      propertyPath: maxHealth
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9f423768985cc04da81567626061ff2, type: 3}
 --- !u!4 &1182390512 stripped
@@ -12843,6 +12873,11 @@ PrefabInstance:
       propertyPath: yOffset
       value: 1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 3245183890413355952, guid: f9f423768985cc04da81567626061ff2,
+        type: 3}
+      propertyPath: maxHealth
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9f423768985cc04da81567626061ff2, type: 3}
 --- !u!4 &1223320603 stripped
@@ -13053,6 +13088,11 @@ PrefabInstance:
       propertyPath: idleSource
       value: 
       objectReference: {fileID: 1245222251}
+    - target: {fileID: 6561115259278849126, guid: 31b25228504b20049ba9e337bf200306,
+        type: 3}
+      propertyPath: maxHealth
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b25228504b20049ba9e337bf200306, type: 3}
 --- !u!4 &1245222250 stripped
@@ -13186,6 +13226,11 @@ PrefabInstance:
       propertyPath: audioPlayer
       value: 
       objectReference: {fileID: 1251277623}
+    - target: {fileID: 6561115259278849126, guid: 31b25228504b20049ba9e337bf200306,
+        type: 3}
+      propertyPath: maxHealth
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b25228504b20049ba9e337bf200306, type: 3}
 --- !u!4 &1251277621 stripped
@@ -13275,7 +13320,7 @@ MonoBehaviour:
   type: 0
   addBulletNumer: 30
   bulletAddPropClip: {fileID: 8300000, guid: 61507aebad0cf874aa8c0d42fcaa4e24, type: 3}
-  clipTextAnimator: {fileID: 1723660871}
+  clipTextAnimator: {fileID: 2079510764}
 --- !u!1001 &1278720203
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13388,6 +13433,11 @@ PrefabInstance:
       propertyPath: idleSource
       value: 
       objectReference: {fileID: 1278720206}
+    - target: {fileID: 6561115259278849126, guid: 31b25228504b20049ba9e337bf200306,
+        type: 3}
+      propertyPath: maxHealth
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b25228504b20049ba9e337bf200306, type: 3}
 --- !u!4 &1278720204 stripped
@@ -13642,6 +13692,11 @@ PrefabInstance:
         type: 3}
       propertyPath: yOffset
       value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245183890413355952, guid: f9f423768985cc04da81567626061ff2,
+        type: 3}
+      propertyPath: maxHealth
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9f423768985cc04da81567626061ff2, type: 3}
@@ -19191,7 +19246,6 @@ GameObject:
   - component: {fileID: 1723660868}
   - component: {fileID: 1723660870}
   - component: {fileID: 1723660869}
-  - component: {fileID: 1723660871}
   m_Layer: 5
   m_Name: BulletClipText
   m_TagString: Untagged
@@ -19260,25 +19314,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723660867}
   m_CullTransparentMesh: 0
---- !u!95 &1723660871
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723660867}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 53bbbee1432f8d64dac2937507685c53, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1735406583
 GameObject:
   m_ObjectHideFlags: 0
@@ -19416,7 +19451,7 @@ MonoBehaviour:
   type: 0
   addBulletNumer: 20
   bulletAddPropClip: {fileID: 8300000, guid: 61507aebad0cf874aa8c0d42fcaa4e24, type: 3}
-  clipTextAnimator: {fileID: 1723660871}
+  clipTextAnimator: {fileID: 2079510764}
 --- !u!1 &1794047358
 GameObject:
   m_ObjectHideFlags: 0
@@ -24947,6 +24982,11 @@ PrefabInstance:
       propertyPath: idleSource
       value: 
       objectReference: {fileID: 1987029206}
+    - target: {fileID: 6561115259278849126, guid: 31b25228504b20049ba9e337bf200306,
+        type: 3}
+      propertyPath: maxHealth
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b25228504b20049ba9e337bf200306, type: 3}
 --- !u!4 &1987029204 stripped
@@ -25135,6 +25175,7 @@ GameObject:
   - component: {fileID: 2079510762}
   - component: {fileID: 2079510761}
   - component: {fileID: 2079510763}
+  - component: {fileID: 2079510764}
   m_Layer: 5
   m_Name: CurrentWeapon
   m_TagString: Untagged
@@ -25216,6 +25257,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponImage: {fileID: 1059781033}
   BulletClipText: {fileID: 1669058949}
+--- !u!95 &2079510764
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079510759}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fd056ccc68e2cdb47968f54cb3df205c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2090797210
 GameObject:
   m_ObjectHideFlags: 0
@@ -26675,7 +26735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453566891247998310}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.151, y: -9.474, z: -37.62}
+  m_LocalPosition: {x: -18.181, y: -9.4, z: -37.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1453566891248093518}
@@ -29744,7 +29804,7 @@ MonoBehaviour:
   type: 2
   addBulletNumer: 5
   bulletAddPropClip: {fileID: 8300000, guid: 61507aebad0cf874aa8c0d42fcaa4e24, type: 3}
-  clipTextAnimator: {fileID: 1723660871}
+  clipTextAnimator: {fileID: 2079510764}
 --- !u!1 &5740373846795654911
 GameObject:
   m_ObjectHideFlags: 0
@@ -40562,6 +40622,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LongDistanceMonster
       objectReference: {fileID: 0}
+    - target: {fileID: 6561115259278849145, guid: 31b25228504b20049ba9e337bf200306,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2134669076067791462, guid: 31b25228504b20049ba9e337bf200306,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -40652,6 +40717,11 @@ PrefabInstance:
       propertyPath: idleSource
       value: 
       objectReference: {fileID: 9007944462806682360}
+    - target: {fileID: 6561115259278849126, guid: 31b25228504b20049ba9e337bf200306,
+        type: 3}
+      propertyPath: maxHealth
+      value: 90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b25228504b20049ba9e337bf200306, type: 3}
 --- !u!4 &9007944462806682359 stripped
