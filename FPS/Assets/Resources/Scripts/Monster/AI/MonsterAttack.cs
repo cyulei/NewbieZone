@@ -45,7 +45,7 @@ public class MonsterMeleeAttack : MonsterAttack
 public class MonsterLongDistanceAttacks : MonsterAttack
 {
     // 再次发射子弹冷却时间
-    private float colddown = 2f;
+    private float colddown = 0.8f;
     private float lastTimeEvaluated;  // 上次执行时间点
 
 
@@ -75,6 +75,7 @@ public class MonsterLongDistanceAttacks : MonsterAttack
         {
             // 发射子弹
             GameObject bullet = Director.GetInstance().CurrentBulletFactory.GetBullet(trans, BulletOwner.Monster);
+            bullet.GetComponent<Bullet>().hurt = ATK;
             lastTimeEvaluated = Time.time;
             return BTResult.Ended;
         }

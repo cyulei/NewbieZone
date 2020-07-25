@@ -127,4 +127,26 @@ public class BossAI : AIForMonster
         }
         isShowHideMonsters = true;
     }
+
+    /// <summary>
+    /// 发送圆形弹幕
+    /// </summary>
+    /// <param name="count">多少个子弹</param>
+    public void SendCircleBullet(int count)
+    {
+        int pointAmount = count;
+        float eachAngle = 360f / pointAmount;
+
+
+        for (int i = 0; i < pointAmount; i++)
+        {
+            // 设置弹幕发送的角度
+            int angle = Random.Range(5, -8);
+            Vector3 newVec = Quaternion.AngleAxis(angle, transform.right) * transform.forward;
+
+            Vector3 direction = Quaternion.Euler(0f, eachAngle * i, 0f) * newVec * 1000;
+            GameObject bullet = Director.GetInstance().CurrentBulletFactory.GetBossBullet(transform.position, direction, BulletOwner.Monster);
+            bullet.GetComponent<Bullet>().hurt = longDistanceATK;
+        }
+    }
 }

@@ -14,8 +14,6 @@ public class WeaponBulletAddProp : MonoBehaviour
     [Tooltip("被拾取的音效")]
     public AudioClip bulletAddPropClip;
 
-    public Animator clipTextAnimator;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -27,15 +25,17 @@ public class WeaponBulletAddProp : MonoBehaviour
                 if (weaponsManager.weaponTypes[i] == type)
                 {
                     weaponsManager.myWeapons[i].totalBulletNumber += addBulletNumer;
+                    FindObjectOfType<WeaponBulletAdd>().ShowUI(i, addBulletNumer);
                 }
             }
             // 播放音频
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             player.footAudioPlayer.PlayClip(bulletAddPropClip, 0.8f, 1.1f);
-            // 播放动画
-            clipTextAnimator.SetTrigger("add");
+
             // 销毁自身
             Destroy(this.gameObject);
         }
     }
+
+
 }

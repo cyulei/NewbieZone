@@ -31,6 +31,9 @@ public class Weapon : MonoBehaviour
     public float shotRate = 0.5f;       // 射击频率
     public float reloadTime = 2.0f;     // 换单频率
 
+    [Tooltip("普通子弹攻击力")]
+    public int ATK;                   // 伤害
+
     float shotTimer = -1.0f;            // 射击计时器   
     float reloadTimer = -1.0f;          // 换单计时器
 
@@ -94,6 +97,8 @@ public class Weapon : MonoBehaviour
 
         // 发射子弹
         GameObject bullet = Director.GetInstance().CurrentBulletFactory.GetBullet(firePosition, BulletOwner.Player, Director.GetInstance().CurrentWeaponsManager.CurrentWeaponType);
+        if(Director.GetInstance().CurrentWeaponsManager.CurrentWeaponType == WeaponType.Normal)
+            bullet.GetComponent<Bullet>().hurt = ATK;
         currentBulletClipNumer--;
         weaponsManager.ChangeWeaponBulletClip(currentBulletClipNumer, singleBulletClipNumer);
     }

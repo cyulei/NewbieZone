@@ -6,7 +6,7 @@ public class MonsterRotateToTarget : BTAction
 {
     protected Transform trans;               // 怪物的Transform
     protected string locationName;
-    private float rotateTime = 0.7f;
+    private float rotateTime = 0.5f;
     private float lastTimeEvaluated;  // 上次执行时间点
 
     private bool isFirstEnter;

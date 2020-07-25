@@ -38,13 +38,13 @@ public class MonsterCheckPlayerInRangeAndRandomAttack : MonsterCheckPlayerInRang
 
         Vector3 offset = target.transform.position - trans.position;
 
-        // 30%进行进程攻击 70%进行远程攻击
-        if(random >= 3 && offset.sqrMagnitude <= searchRadius * searchRadius && isLongDistance)
+        // 50%进行进程攻击 50%进行远程攻击
+        if(random >= 5 && offset.sqrMagnitude <= searchRadius * searchRadius && isLongDistance)
         {
             //Debug.Log("远程攻击");
             return true;
         }
-        if(random < 3 && offset.sqrMagnitude <= searchRadius * searchRadius && !isLongDistance)
+        if(random < 5 && offset.sqrMagnitude <= searchRadius * searchRadius && !isLongDistance)
         {
             //Debug.Log("近程攻击");
             return true;

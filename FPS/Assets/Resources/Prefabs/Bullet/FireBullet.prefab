@@ -111,6 +111,6 @@ MonoBehaviour:
   endTime: 4
   hurt: 10
   bulletType: 0
-  fireHurt: 20
+  fireHurt: 15
   fireTimes: 3
   fireIntervalTime: 1

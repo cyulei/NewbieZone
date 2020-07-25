@@ -24,7 +24,7 @@ public class FireBullet : Bullet
     {
         base.HurtExtraEffect(other);
         // 配置额外效果
-        effectTool.AddEffect(new FireEffect(3, 2, 0, effectTool.EffectID, other, 10));
+        effectTool.AddEffect(new FireEffect(fireTimes, fireIntervalTime, 0, effectTool.EffectID, other, fireHurt));
     }
 
 

@@ -19,6 +19,8 @@ public class PlayerBloodAddProp : MonoBehaviour
             // 加血
             Health health = other.gameObject.GetComponent<Health>();
             health.SetHealth(health.MyHealth + AddBloodNumber);
+
+            FindObjectOfType<HPAdd>().ShowUI(AddBloodNumber);
             // 播放音频
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             player.footAudioPlayer.PlayClip(bloodPropClip, 0.8f, 1.1f);

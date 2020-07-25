@@ -16,6 +16,17 @@ public class BulletFactory : MonoBehaviour
         Director.GetInstance().CurrentBulletFactory = this;
     }
 
+    public GameObject GetBossBullet(Vector3 position, Vector3 direction, BulletOwner bulletOwner)
+    {
+        bullet = Instantiate(Resources.Load<GameObject>("Prefabs/Bullet/BossBullet"), position, Quaternion.identity).GetComponent<Bullet>();
+        bullet.transform.position = position;
+
+        // 设置子弹所属方
+        bullet.bulletOwner = bulletOwner;
+        bullet.GetComponent<Bullet>().DirectionTowards = direction;
+        return bullet.gameObject;
+    }
+
     /// <summary>
     /// 获取子弹
     /// </summary>

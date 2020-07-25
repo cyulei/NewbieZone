@@ -11,6 +11,8 @@ public class Health : MonoBehaviour
     [Tooltip("物体最大血量")]
     public int maxHealth = 100;
 
+    [HideInInspector]
+    public bool disable;   // 是否启用血量
 
     private void Start()
     {
@@ -19,6 +21,9 @@ public class Health : MonoBehaviour
 
     public void SetHealth(int health)
     {
+        if (disable)
+            return;
+
         //Debug.Log("血量变化");
         if (health > maxHealth) _health = maxHealth;
         else if (health < minHealth) _health = minHealth;
