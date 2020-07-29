@@ -70,7 +70,7 @@ public class BTParallel : BTNode
             }
         }
         if (endingResultCount == children.Count)
-        {   // only apply to AND func
+        {   
             ResetResults();
             return BTResult.Ended;
         }
@@ -110,11 +110,10 @@ public class BTParallel : BTNode
 
     
     /// <summary>
-    /// ?????
+    /// 将所有节点都设置为在运行
     /// </summary>
     private void ResetResults()
     {
-        // TODO: 
         for (int i = 0; i < results.Count; i++)
         {
             results[i] = BTResult.Running;

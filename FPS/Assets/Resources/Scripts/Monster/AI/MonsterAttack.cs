@@ -32,7 +32,8 @@ public class MonsterMeleeAttack : MonsterAttack
     }
     protected override BTResult Execute()
     {
-        CameraShaker.Instance.Shake(0.2f, 0.05f * 6.0f);
+        CameraShaker.Instance.Shake(0.2f, 0.05f * 4.0f);
+        Singleton<PlayerHurtUI>.Instance.MonsterAttack();
         Director.GetInstance().CurrentHealthManagemer.AttackOtherObject(GameObject.Find("Player"), ATK);
 
         return BTResult.Ended;

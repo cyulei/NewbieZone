@@ -83,6 +83,7 @@ public class Bullet : MonoBehaviour
         {
             // 如果击中玩家，并且是怪物的子弹
             AttackOther(other.gameObject, hurt);         // 伤害
+            Singleton<PlayerHurtUI>.Instance.MonsterAttack();
             HurtExtraEffect(other.gameObject);           // 除了伤害以外的其他效果
             isHitGameobject = true;
         }
